@@ -1,0 +1,213 @@
+@prefix trans: <https://primer.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+trans:msg_2026-05-26T16-29-04.707976 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Alright, Malakhi! Tell me about a class you enjoy: " ;
+    trans:timestamp "2026-05-26T16:29:04.707976"^^xsd:dateTime .
+
+trans:msg_2026-05-26T16-29-04.708314 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "I enjoyed my introductory biology class last semester!" ;
+    trans:timestamp "2026-05-26T16:29:04.708314"^^xsd:dateTime .
+
+trans:msg_2026-05-26T16-29-14.987061 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Alright, Malakhi! Tell me about a class you dislike: " ;
+    trans:timestamp "2026-05-26T16:29:14.987061"^^xsd:dateTime .
+
+trans:msg_2026-05-26T16-29-14.987599 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "I didn't really like my British Literature class in high school." ;
+    trans:timestamp "2026-05-26T16:29:14.987599"^^xsd:dateTime .
+
+trans:msg_2026-05-26T16-56-30.290152 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Alright, you were telling me about introductory biology class. What's your favorite topic of introductory biology class? " ;
+    trans:timestamp "2026-05-26T16:56:30.290152"^^xsd:dateTime .
+
+trans:msg_2026-05-26T16-56-30.291059 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "I really enjoyed learning about cellular processes and how they contribute to medical breakthroughs!" ;
+    trans:timestamp "2026-05-26T16:56:30.291059"^^xsd:dateTime .
+
+trans:msg_2026-05-26T16-57-07.058244 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "If I understood correctly, you're not a big fan of british literature class in high school. Can you tell me why that is? " ;
+    trans:timestamp "2026-05-26T16:57:07.058244"^^xsd:dateTime .
+
+trans:msg_2026-05-26T16-57-07.061333 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "I didn't really understand old- and middle-English texts that well, so assignments were harder to do." ;
+    trans:timestamp "2026-05-26T16:57:07.061333"^^xsd:dateTime .
+
+trans:msg_2026-05-26T17-01-28.232710 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Alright, so you seem pretty interested in introductory biology class, and I'm assuming this means you're pretty good at curiosity. Does this seem accurate? " ;
+    trans:timestamp "2026-05-26T17:01:28.232710"^^xsd:dateTime .
+
+trans:msg_2026-05-26T17-01-28.233694 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "Yeah, I think so!" ;
+    trans:timestamp "2026-05-26T17:01:28.233694"^^xsd:dateTime .
+
+trans:msg_2026-05-26T17-01-38.445461 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Ok, you said you don't really like british literature class in high school. Because of this, I'm assuming you might have trouble with patience. Does this seem accurate? " ;
+    trans:timestamp "2026-05-26T17:01:38.445461"^^xsd:dateTime .
+
+trans:msg_2026-05-26T17-01-38.445852 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "No, that's not accurate." ;
+    trans:timestamp "2026-05-26T17:01:38.445852"^^xsd:dateTime .
+
+trans:msg_2026-05-29T22-06-41.831184 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "What specific parts of cellular processes do you find most engaging?" ;
+    trans:timestamp "2026-05-29T22:06:41.831184"^^xsd:dateTime .
+
+trans:msg_2026-05-29T22-06-41.833209 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text " I really like learning about cellular signaling pathways!" ;
+    trans:timestamp "2026-05-29T22:06:41.833209"^^xsd:dateTime .
+
+trans:msg_2026-05-29T22-44-20.423405 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "What specific aspects of cellular signaling make the information easier for you to process than the literature texts? " ;
+    trans:timestamp "2026-05-29T22:44:20.423405"^^xsd:dateTime .
+
+trans:msg_2026-05-29T22-44-20.429121 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "Cellular signaling is more procedural, and the literature texts are more abstract." ;
+    trans:timestamp "2026-05-29T22:44:20.429121"^^xsd:dateTime .
+
+trans:msg_2026-05-29T23-16-24.066362 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "What specific aspects of procedural learning make it more engaging for you than interpreting abstract ideas? " ;
+    trans:timestamp "2026-05-29T23:16:24.066362"^^xsd:dateTime .
+
+trans:msg_2026-05-29T23-16-24.075815 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "I think it's easier for me to understand procedures that don't change, compared to abstract ideas that are up to interpretation." ;
+    trans:timestamp "2026-05-29T23:16:24.075815"^^xsd:dateTime .
+
+trans:msg_2026-05-29T23-24-08.542368 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "What specific aspects of procedural learning make you feel more confident in your ability to master a subject? " ;
+    trans:timestamp "2026-05-29T23:24:08.542368"^^xsd:dateTime .
+
+trans:msg_2026-05-29T23-24-08.546427 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "It's easier for me to memorize procedures." ;
+    trans:timestamp "2026-05-29T23:24:08.546427"^^xsd:dateTime .
+
+trans:msg_2026-05-30T17-33-52.989335 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Alright, so you seem pretty interested in introductory biology class, and I'm assuming this means you're pretty good at curiosity. Does this seem accurate? " ;
+    trans:timestamp "2026-05-30T17:33:52.989335"^^xsd:dateTime .
+
+trans:msg_2026-05-30T17-33-52.992371 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "Yeah, that seems accurate!" ;
+    trans:timestamp "2026-05-30T17:33:52.992371"^^xsd:dateTime .
+
+trans:msg_2026-05-30T17-34-28.012242 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "What specific aspects of a procedure make it feel more manageable for you than an abstract concept? " ;
+    trans:timestamp "2026-05-30T17:34:28.012242"^^xsd:dateTime .
+
+trans:msg_2026-05-30T17-34-28.013166 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "Procedures are easier to memorize and understand than abstract concepts, in my opinion." ;
+    trans:timestamp "2026-05-30T17:34:28.013166"^^xsd:dateTime .
+
+trans:msg_2026-05-31T19-26-30.764333 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "When you are studying a complex biological procedure, how do you typically approach a step that isn't immediately clear? " ;
+    trans:timestamp "2026-05-31T19:26:30.764333"^^xsd:dateTime .
+
+trans:msg_2026-05-31T19-26-30.765686 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "Good question! In that situation, I try to visualize that complex process and relate to something I'm more familiar with. For example, I compared the functions of different organelles to workers in a mailroom, as I used to work in one." ;
+    trans:timestamp "2026-05-31T19:26:30.765686"^^xsd:dateTime .
+
+trans:msg_2026-05-31T19-46-51.615750 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Alright, Malakhi! Tell me about another class you enjoy: " ;
+    trans:timestamp "2026-05-31T19:46:51.615750"^^xsd:dateTime .
+
+trans:msg_2026-05-31T19-46-51.617678 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "I really liked my Physics II class last semester!" ;
+    trans:timestamp "2026-05-31T19:46:51.617678"^^xsd:dateTime .
+
+trans:msg_2026-05-31T19-49-54.602726 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Ok, you told me that you enjoy physics ii class. What exactly about physics ii class excites you? " ;
+    trans:timestamp "2026-05-31T19:49:54.602726"^^xsd:dateTime .
+
+trans:msg_2026-05-31T19-49-54.603966 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "The problem-solving process was very procedural and math-reinforced, so it came more naturally to me than other subjects." ;
+    trans:timestamp "2026-05-31T19:49:54.603966"^^xsd:dateTime .
+
+trans:msg_2026-05-31T19-50-29.005566 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Alright, Malakhi! Tell me about another class you dislike: " ;
+    trans:timestamp "2026-05-31T19:50:29.005566"^^xsd:dateTime .
+
+trans:msg_2026-05-31T19-50-29.005985 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "I didn't really like my Lifespan Development class in high school." ;
+    trans:timestamp "2026-05-31T19:50:29.005985"^^xsd:dateTime .
+
+trans:msg_2026-05-31T20-03-02.547717 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Alright, Malakhi! Tell me about another class you enjoy: " ;
+    trans:timestamp "2026-05-31T20:03:02.547717"^^xsd:dateTime .
+
+trans:msg_2026-05-31T20-03-02.549139 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "I enjoyed my social justice in Spanish-speaking countries class a couple semesters ago." ;
+    trans:timestamp "2026-05-31T20:03:02.549139"^^xsd:dateTime .
+
+trans:msg_2026-05-31T20-07-24.576875 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Alright, Malakhi! Tell me about another class you enjoy: " ;
+    trans:timestamp "2026-05-31T20:07:24.576875"^^xsd:dateTime .
+
+trans:msg_2026-05-31T20-07-24.577455 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "I enjoyed my Physics II class!" ;
+    trans:timestamp "2026-05-31T20:07:24.577455"^^xsd:dateTime .
+
+trans:msg_2026-05-31T20-08-33.381513 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Alright, so you seem pretty interested in physics ii class, and I'm assuming this means you're pretty good at scientific curiosity. Does this seem accurate? " ;
+    trans:timestamp "2026-05-31T20:08:33.381513"^^xsd:dateTime .
+
+trans:msg_2026-05-31T20-08-33.382890 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "Yeah, that seems right!" ;
+    trans:timestamp "2026-05-31T20:08:33.382890"^^xsd:dateTime .
+
+trans:msg_2026-05-31T20-09-52.549680 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Alright, so you seem pretty interested in introductory biology class, and I'm assuming this means you're pretty good at basic understanding of biological systems. Does this seem accurate? " ;
+    trans:timestamp "2026-05-31T20:09:52.549680"^^xsd:dateTime .
+
+trans:msg_2026-05-31T20-09-52.549985 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "I think so!" ;
+    trans:timestamp "2026-05-31T20:09:52.549985"^^xsd:dateTime .
+
+trans:msg_2026-05-31T20-23-47.714974 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "What was it about the social justice class that kept you engaged despite it being less procedural than physics or biology? " ;
+    trans:timestamp "2026-05-31T20:23:47.714974"^^xsd:dateTime .
+
+trans:msg_2026-05-31T20-23-47.716913 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "Really good question! I think I enjoyed learning about something that had a real-world impact on people across the world." ;
+    trans:timestamp "2026-05-31T20:23:47.716913"^^xsd:dateTime .
+

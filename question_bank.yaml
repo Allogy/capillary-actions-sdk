@@ -1,0 +1,60 @@
+version: 1.0
+description: Dynamic question templates based on RDF student graph states
+onboarding_questions:
+- id: ask_enjoyed_class
+  text: Welcome to Primer, {name}! To get started, tell me about a class you really
+    enjoy.
+  saves_to: enjoys_class
+- id: ask_disliked_class
+  text: Alright, now tell me about a class you didn't really like that much.
+  saves_to: dislikes_class
+- id: ask_interest
+  text: Ok, now let's talk about something you're interested in!
+  saves_to: interested_in
+personalized_follow_ups:
+- condition: enjoyed_class
+  trigger_predicate: enjoys_class
+  fixed_templates:
+  - Ok, you told me that you enjoy {object}. What exactly about {object} excites you?
+  - Alright, you were telling me about {object}. What's your favorite topic of {object}?
+  dynamic_templates:
+  - What was it about the social justice class that kept you engaged despite it being
+    less procedural than physics or biology?
+- condition: disliked_class
+  trigger_predicate: disliked_class
+  fixed_templates:
+  - If I understood correctly, you're not a big fan of {object}. Can you tell me why
+    that is?
+  - So I take it you aren't the biggest fan of {object}. What about {object} don't
+    you like?
+  dynamic_templates:
+  - What specific aspects of procedural learning make it more engaging for you than
+    interpreting abstract ideas?
+  - What specific aspects of procedural learning make you feel more confident in your
+    ability to master a subject?
+  - What specific aspects of a procedure make it feel more manageable for you than
+    an abstract concept?
+  - When you are studying a complex biological procedure, how do you typically approach
+    a step that isn't immediately clear?
+- condition: interest
+  trigger_predicates:
+  - interested_in
+  - interest_infers
+  - academically_relates_to
+  fixed_templates:
+  - Alright, so you seem pretty interested in {interested_in}, and I'm assuming this
+    means you're pretty good at {interest_infers}. Does this seem accurate?
+  - I think you might be good at {academically_relates_to} based on your ability to
+    {interest_infers}. Does this seem accurate?
+  dynamic_templates:
+  - null
+- condition: skill_to_improve
+  trigger_predicate:
+  - work_on
+  fixed_templates:
+  - Ok, you said you don't really like {disliked_class}. Because of this, I'm assuming
+    you might have trouble with {skill}. Does this seem accurate?
+  - From our conversation, I think you might need to work on {skill} because of your
+    experience in {disliked_class}. Does this seem accurate?
+  dynamic_templates:
+  - null

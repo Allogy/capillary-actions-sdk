@@ -1,0 +1,64 @@
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix ns1: <https://primer.org/> .
+
+ns1:all_users a foaf:Group ;
+    foaf:member ns1:malakhi .
+
+ns1:basic_understanding_of_biological_systems ns1:reliability ns1:accuracy_level_50 .
+
+ns1:british_literature ns1:reliability ns1:accuracy_level_0 .
+
+ns1:british_literature_class_in_high_school a ns1:class ;
+    ns1:work_on ns1:british_literature,
+        ns1:patience,
+        ns1:tolerance .
+
+ns1:curiosity ns1:reliability ns1:accuracy_level_100 .
+
+ns1:empathy ns1:reliability ns1:accuracy_level_0 .
+
+ns1:intercultural_competency ns1:reliability ns1:accuracy_level_0 .
+
+ns1:introductory_biology_class a ns1:class ;
+    ns1:has_skill ns1:basic_understanding_of_biological_systems,
+        ns1:curiosity,
+        ns1:scientific_curiosity .
+
+ns1:lifespan_development_class a ns1:class ;
+    ns1:work_on ns1:empathy,
+        ns1:preference_for_quantitative_subjects .
+
+ns1:malakhi a foaf:Person ;
+    foaf:name "Malakhi" ;
+    ns1:dislikes_class ns1:british_literature_class_in_high_school,
+        ns1:lifespan_development_class ;
+    ns1:enjoys_class ns1:introductory_biology_class,
+        ns1:physics_ii_class,
+        ns1:social_justice_in_spanish-speaking_countries_class .
+
+ns1:mathematical_reasoning ns1:reliability ns1:accuracy_level_0 .
+
+ns1:patience ns1:reliability ns1:accuracy_level_-50 .
+
+ns1:physics_ii_class a ns1:class ;
+    ns1:has_skill ns1:mathematical_reasoning,
+        ns1:scientific_curiosity,
+        ns1:scientific_interest .
+
+ns1:preference_for_quantitative_subjects ns1:reliability ns1:accuracy_level_0 .
+
+ns1:scientific_interest ns1:reliability ns1:accuracy_level_0 .
+
+ns1:social_justice_in_spanish-speaking_countries_class a ns1:class ;
+    ns1:has_skill ns1:intercultural_competency,
+        ns1:sociopolitical_awareness,
+        ns1:sociopolitical_empathy .
+
+ns1:sociopolitical_awareness ns1:reliability ns1:accuracy_level_0 .
+
+ns1:sociopolitical_empathy ns1:reliability ns1:accuracy_level_0 .
+
+ns1:tolerance ns1:reliability ns1:accuracy_level_0 .
+
+ns1:scientific_curiosity ns1:reliability ns1:accuracy_level_50 .
+
