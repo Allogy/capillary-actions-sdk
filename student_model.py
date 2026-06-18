@@ -61,12 +61,19 @@ class User:
 
 
     def create_id(name):
+        """
+        Takes a string as an argument and returns a formatted ID with that string.
+        For example create_id("user123") --> https://primer.org/user123
+        """
         return f"{EX}{reformat(name)}"
 
     def __str__(self):
         return self.name
 
     def get_id(self):
+        """
+        Returns the ID associated with the user
+        """
         return self.id
 
     def add_experience(self, pred, obj):
@@ -77,15 +84,28 @@ class Primer:
 
     def __init__(self, n = 3):
         self.complexity = n # Represents how many skills are inferred per given class/interest
-        self.focuses = ("enjoyed_class", "disliked_class", "interest", "skill_to_improve")
+        self.focuses = ("classes the student enjoys", "classes the student dislikes", "interests the student has", "skills the student may have to improve on")
 
     def get_complexity(self):
+        """
+        Returns the number of skills that are inferred per given class/interest
+        """
         return self.complexity
 
     def get_focuses(self):
+        """
+        Returns the particular focuses that the bot can choose from:
+            - "classes the student enjoys"
+            - "classes the student dislikes"
+            - "interests the student has"
+            - "skills the student may have to improve on"
+        """
         return self.focuses
 
     def record_transcript(self, user_id, input_text):
+        """
+        Given a particular user and text, adds dialogue to a running transcript with a timestamp.
+        """
         timestamp = datetime.datetime.now().isoformat()
         msg_id = URIRef(f"{EX}msg_{timestamp.replace(':', '-')}")
 
@@ -94,17 +114,31 @@ class Primer:
         transcript.add((msg_id, EX.text, Literal(input_text)))
         transcript.add((msg_id, EX.timestamp, Literal(timestamp, datatype = XSD.dateTime)))
 
-    def trans_input(self, user_id, prompt): # Records users' input in the transcript
+    def trans_input(self, user_id, prompt):
+        """
+        Records users' input in the transcript.
+        """
         input_text = input(prompt)
         self.record_transcript(URIRef(f"{EX}primer_bot"), prompt)
         self.record_transcript(user_id, input_text)
         return input_text
 
-    def trans_print(self, prompt): # Records the Primer's message in the transcript
+    def trans_print(self, prompt):
+        """
+        Records the Primer's message in the transcript.
+        """
         print(prompt)
         self.record_transcript(URIRef(f"{EX}primer_bot"), prompt)
 
     def parse_user_input(self, user_text):
+        """
+        Takes the user's input and parses it into a dictionary formatted the following way:
+            {
+                "predicate": *e.g., a verb related to the user*
+                "object": *the object of the sentence the user has provided*
+                "datatype": *the datatype of the user's input, typically "string"*
+            }
+        """
         response = client.chat.completions.create(
             model = "qwen/qwen3-coder",
             messages = [
@@ -127,6 +161,10 @@ class Primer:
         return json.loads(response.choices[0].message.content)
 
     def generate_personalized_question(self, current_user, focus_number):
+        """
+        The backbone of the dynamic portion of Primer.
+        Generates a personalized question for a particular user with a particular focus, drawing from available information from the transcript and the user's knowledge graph.
+        """
         messages = []
         for msg in transcript.subjects(RDF.type, EX.Message):
             speaker = transcript.value(msg, EX.speaker)
@@ -155,14 +193,17 @@ class Primer:
         user_connections = [group for group in user_graph.triples((user.get_id(), None, None)) if group[1] not in (RDF.type, FOAF.name)]
         primary_objects = [group[-1] for group in user_connections]
 
-        primary_object_connections = []
+        primary_object_skills = []
+        primary_object_involves = []
         for obj in primary_objects:
             group = list(user_graph.triples((obj, None, None)))
             for triple in group:
-                if triple[1] != RDF.type:
-                    primary_object_connections.append(triple)
+                if triple[1] not in (RDF.type, EX['involves']):
+                    primary_object_skills.append(triple)
+                elif triple[1] == EX['involves']:
+                    primary_object_involves.append(triple)
 
-        secondary_objects = [triple[-1] for triple in primary_object_connections]
+        secondary_objects = [triple[-1] for triple in primary_object_skills]
         all_inference_scores = []
         for obj in secondary_objects:
             accuracy = int( list(user_graph.objects(obj, EX["reliability"]))[0].split("/")[-1].split("_")[-1] )
@@ -174,7 +215,35 @@ class Primer:
                 filtered_inference_scores.append((unformat(str(obj)), score))
 
         user_connections = [tuple(map(unformat, group)) for group in user_connections]
-        primary_object_connections = [tuple(map(unformat, group)) for group in primary_object_connections]
+        primary_object_skills = [tuple(map(unformat, group)) for group in primary_object_skills]
+
+
+        user_interests = [group for group in user_graph.triples((user.get_id(), EX["interested_in"], None)) if group[1] not in (RDF.type, FOAF.name)]
+        interests = [group[-1] for group in user_interests]
+
+        interest_skills = []
+        interest_involves = []
+        for interest in interests:
+            group = list(user_graph.triples((interest, None, None)))
+            for triple in group:
+                if triple[1] not in (RDF.type, EX['involves']):
+                    interest_skills.append(triple)
+                elif triple[1] == EX['involves']:
+                    interest_involves.append(triple)
+
+        secondary_interest_objects = [triple[-1] for triple in interest_skills]
+        all_inference_scores = []
+        for obj in secondary_interest_objects:
+            accuracy = int( list(user_graph.objects(obj, EX["reliability"]))[0].split("/")[-1].split("_")[-1] )
+            all_inference_scores.append((obj, accuracy))
+
+        filtered_interest_inference_scores = []
+        for obj, score in all_inference_scores:
+            if score >= 0:
+                filtered_interest_inference_scores.append((unformat(str(obj)), score))
+
+        user_interests = [tuple(map(unformat, group)) for group in user_interests]
+        interest_skills = [tuple(map(unformat, group)) for group in interest_skills]
 
         for _, role, text in messages:
             api_messages.append({"role": role, "content": text})
@@ -182,10 +251,21 @@ class Primer:
 
         for _, predicate, object in user_connections:
             api_messages.append({"role": "assistant", "content": f"Additional information: {str(current_user)} {unformat(predicate)} {unformat(object)}."})
-        for object, predicate, inference in primary_object_connections:
+        for object, predicate, inference in primary_object_skills:
             api_messages.append({"role": "assistant", "content": f"Additional information: {unformat(object)} implies that {str(current_user)} should {unformat(predicate)} {unformat(inference)}."})
         for inference, score in filtered_inference_scores:
             api_messages.append({"role": "assistant", "content": f"Additional information: the connection to {unformat(inference)} has an accuracy score of {score}, with 0 being neutral and higher scores being better."})
+        for object, _, description in primary_object_involves:
+            api_messages.append({"role": "assistant", "content": f"Additional information: according to the student, {object} involves {description}."})
+
+        for _, predicate, object in user_interests:
+            api_messages.append({"role": "assistant", "content": f"Additional information: {str(current_user)} {unformat(predicate)} {unformat(object)}."})
+        for object, predicate, inference in interest_skills:
+            api_messages.append({"role": "assistant", "content": f"Additional information: an interest in {unformat(object)} implies that {str(current_user)} should {unformat(predicate)} {unformat(inference)}."})
+        for inference, score in filtered_interest_inference_scores:
+            api_messages.append({"role": "assistant", "content": f"Additional information: the connection to {unformat(inference)} has an accuracy score of {score}, with 0 being neutral and higher scores being better."})
+        for object, _, description in interest_involves:
+            api_messages.append({"role": "assistant", "content": f"Additional information: according to the student, {object} involves {description}."})
 
 
         response = client.chat.completions.create(
@@ -217,26 +297,33 @@ class Primer:
 
     # NOTE: In practice, these should save to unique files for each user.
     def add_personalized_question(self, focus_number, new_template, filename = "question_bank.yaml"):
+        """
+        Adds the personalized question to a YAML file, categorized by the focus of the question.
+        """
         with open(filename, "r") as file:
             data = yaml.safe_load(file)
 
+        yaml_focuses = ("enjoyed_class", "disliked_class", "interest", "skill_to_improve")
         found = False
         for item in data.get("personalized_follow_ups", []):
-            if item.get("condition") == self.get_focuses()[focus_number]:
+            if item.get("condition") == yaml_focuses[focus_number]:
                 item["dynamic_templates"].append(new_template)
                 found = True
-                print(f"Successfully added template question to condition: {self.get_focuses()[focus_number]}")
+                print(f"Successfully added template question to condition: {yaml_focuses[focus_number]}")
                 break
 
         if not found:
-            print(f"Error: Condition '{self.get_focuses()[focus_number]}' not found in YAML.")
+            print(f"Error: Condition '{yaml_focuses[focus_number]}' not found in YAML.")
             return
 
         with open(filename, "w") as file:
-            yaml.dump(data, file, default_flow_style=False, sort_keys=False)
+            yaml.dump(data, file, default_flow_style = False, sort_keys = False)
 
     # TODO: FIX THIS. It's very buggy... (truncates sentences sometimes)
     def grammar_check(self, output):
+        """
+        Takes a string as input and outputs a grammatically correct version of that string.
+        """
         response = client.chat.completions.create(
             model = "deepseek/deepseek-v4-flash",
                 messages = [
@@ -256,6 +343,14 @@ class Primer:
         return response.choices[0].message.content.strip()
 
     def infer_related_skill(self, predicate, object):
+        """
+        Given a predicate and object, infers a number of related skills that the user may have or need to work on.
+        Output is formatted in the following way:
+            {
+                'predicate' : string (predicate related to the skill)
+                'object' : string (2-3 words describing key underlying skill)
+            }
+        """
         response = client.chat.completions.create(
             model = "google/gemma-4-26b-a4b-it", #"deepseek/deepseek-r1-0528:free", # Choose any model from OpenRouter
             messages = [
@@ -272,8 +367,12 @@ class Primer:
         return json.loads(response.choices[0].message.content)
 
     def find_academic_relations(self):
+        """
+        Connects the skills related to the user's interests to possibly related academic skills.
+        Automatically adds new connections to the knowledge graph.
+        """
         for interest in user_graph.subjects(RDF.type, EX["interest"]):
-            for trait_id in user_graph.objects(interest, EX[f"interest_infers"]):
+            for trait_id in user_graph.objects(interest, EX[f"has_skill"]):
                 trait = trait_id[(str(trait_id).index(EX) + 1) : ].replace("_", " ")
                 response = client.chat.completions.create(
                     model = "meta-llama/llama-3-8b-instruct", # Choose any model from OpenRouter
@@ -287,6 +386,15 @@ class Primer:
                 user_graph.add( (trait_id, EX["academically_relates_to"], EX[reformat(response.choices[0].message.content)]) )
 
     def similarity_score(self, object1, object2):
+        """
+        Computes a "similarity score" between two given objects.
+        The score ranges from 0 (not at all similar) to 100 (exactly the same).
+        Output is a dictionary formatted in the following way:
+            {
+                "score": an integer between 0 and 100
+                "explanation": a string breaking down why the two objects received the similarity score they did
+            }
+        """
         # Fixed: Structured JSON prompt ensures reliable integer parsing
         response = client.chat.completions.create(
             model = "google/gemma-4-26b-a4b-it",
@@ -298,32 +406,58 @@ class Primer:
         )
         return json.loads(response.choices[0].message.content)
 
-    def parse_yes_or_no(self, prompt):
+    def parse_yes_or_no(self, user_text):
+        """
+        Given a string of text, determines if that text leans more positive or more negative.
+        Output is a dictionary formatted in the following way:
+            {
+            "{
+                "answer": string ('YES' if text is affirmative, 'NO' if negative)
+                "degree": integer (from -50 for extremely negative to 50 for extremely affirmative)
+                "explanation": string (briefly explaining the reasoning)
+            }
+        """
         response = client.chat.completions.create(
-            model = "meta-llama/llama-3-8b-instruct",
+            model = "qwen/qwen3-coder",
             messages = [
                 {
                     "role": "system",
                     "content": (
-                        "You are a data extraction tool. Extract information from the user "
-                        "and return ONLY a JSON object with these keys: 'answer', 'explanation'."
-                        "The 'answer' key should correspond with a value of 'YES' if the prompt is mostly affirmative."
-                        "The 'answer' key should correspond with a value of 'NO' if the prompt is mostly negative."
-                        "The 'explanation' key should correspond with a string object explaining why the value with the 'answer' key is 'YES' or 'NO' based on the prompt."
-                        "Example: If user says 'That is not really accurate.', return: "
-                        '{"answer": "NO", "explanation": "The user used the phrase \'not really accurate\', which indicates that they are negatively responding to an incorrect statement."}'
+                        "You are a strict data extraction tool. Analyze the user's input statement "
+                        "and return ONLY a valid JSON object matching this schema precisely:\n"
+                        "{\n"
+                        "  \"answer\": \"string ('YES' if text is affirmative, 'NO' if negative)\",\n"
+                        "  \"degree\": \"integer (from -50 for extremely negative to 50 for extremely affirmative)\",\n"
+                        "  \"explanation\": \"string (briefly explaining the reasoning)\"\n"
+                        "}\n"
+                        "Example input: 'That is not really accurate.'\n"
+                        "Example output: {\"answer\": \"NO\", \"degree\": -40, \"explanation\": \"The user used the phrase \'not really accurate\', which indicates that they are negatively responding to an incorrect statement.\"}"
                     )
                 },
-                {"role": "user", "content": prompt}
+                {"role": "user", "content": user_text}
             ],
-            # Optional: some models support 'response_format' to force JSON
-            response_format = {"type": "json_object"}
+            response_format={"type": "json_object"}
         )
 
-        # Convert the string response into a Python dictionary
         return json.loads(response.choices[0].message.content)
 
-    # AI tools /\
+    # NOTE: In hindsight, the accuracies should be specific to certain users; it doesn't make sense to have the
+    def get_skill_accuracies(self, current_user):
+        """
+        Returns a dictionary mapping a user's skills in the knowledge graph to its assigned accuracy score.
+        The dictionary is formatted in the following way:
+            {
+                skill (string) : score (int)
+            }
+        """
+        triples = list(user_graph.triples((None, EX["reliability"], None)))
+        skill_accuracies = {
+            unformat(str(triple[0])) : int(str(triple[2]).split("_")[-1])
+            for triple in triples
+        }
+        return skill_accuracies
+
+    # Tools /\
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     # Primer states \/
 
@@ -357,7 +491,10 @@ class Primer:
         formatted_question = random.choice(templates).format(object = course_name)
 
         response = self.trans_input(current_user.get_id(), formatted_question + " ")
+        parsed = self.parse_user_input(response)
 
+        user_graph.add((course, EX["involves"], EX[reformat(parsed["object"])]))
+        #user_graph.add( (EX[reformat(parsed["object"])], EX["reliability"], EX["accuracy_level_50"]) ) # Infers some accuracy because this input is directly from the user
 
     def reinforce_enjoyed_class_skills(self, current_user):
         """
@@ -376,11 +513,12 @@ class Primer:
 
         response = self.trans_input(current_user.get_id(), formatted_question + " ")
 
-        improvement_score = 50 # TODO: Make the improvement score variable based on the response. This variation may come from Primer.parse_yes_or_no
         affirm = p.parse_yes_or_no(response)
+        #print(affirm)
+        improvement_score = affirm["degree"] # TODO: Make the improvement score variable based on the response. This variation may come from Primer.parse_yes_or_no
         old_accuracy = int( list(user_graph.objects(focus_skill, EX["reliability"]))[0].split("/")[-1].split("_")[-1] )
 
-        new_accuracy = (old_accuracy + improvement_score) if "yes" in affirm["answer"].lower() else (old_accuracy - improvement_score)
+        new_accuracy = old_accuracy + improvement_score
 
         user_graph.remove((focus_skill, EX["reliability"], EX[f"accuracy_level_{old_accuracy}"]))
         user_graph.add((focus_skill, EX["reliability"], EX[f"accuracy_level_{new_accuracy}"]))
@@ -417,6 +555,10 @@ class Primer:
         formatted_question = random.choice(templates).format(object = course_name)
 
         response = self.trans_input(current_user.get_id(), formatted_question + " ")
+        parsed = self.parse_user_input(response)
+
+        user_graph.add((course, EX["involves"], EX[reformat(parsed["object"])]))
+        #user_graph.add( (EX[reformat(parsed["object"])], EX["reliability"], EX["accuracy_level_50"]) ) # Infers some accuracy because this input is directly from the user
 
 
     def reinforce_disliked_class_skills(self, current_user):
@@ -435,60 +577,15 @@ class Primer:
         formatted_question = random.choice(templates).format(disliked_class = course_name, skill = unformat(focus_skill))
         response = self.trans_input(current_user.get_id(), formatted_question + " ")
 
-        improvement_score = 50 # TODO: Make the improvement score variable based on the response. This variation may come from Primer.parse_yes_or_no
         affirm = p.parse_yes_or_no(response)
+        print(affirm)
+        improvement_score = affirm["degree"] # TODO: Make the improvement score variable based on the response. This variation may come from Primer.parse_yes_or_no
         old_accuracy = int( list(user_graph.objects(focus_skill, EX["reliability"]))[0].split("/")[-1].split("_")[-1] )
 
-        new_accuracy = (old_accuracy + improvement_score) if "yes" in affirm["answer"].lower() else (old_accuracy - improvement_score)
+        new_accuracy = old_accuracy + improvement_score
 
         user_graph.remove((focus_skill, EX["reliability"], EX[f"accuracy_level_{old_accuracy}"]))
         user_graph.add((focus_skill, EX["reliability"], EX[f"accuracy_level_{new_accuracy}"]))
-
-    '''
-    def dislike_class_state(self, current_user):
-        disliked_classes = list(user_graph.objects(current_user.get_id(), EX["dislikes_class"]))
-
-        if len(disliked_classes) == 0 or random.choice(("expand knowledge", "learn new class")) == "learn new class":
-            response = self.trans_input(current_user.get_id(), f"Alright, {current_user}! Tell me about {"a" if len(disliked_classes) == 0 else "another"} class you dislike: ")
-
-            parsed = self.parse_user_input(response)
-            current_user.add_experience(EX["dislikes_class"], EX[reformat(parsed["object"])])
-            user_graph.add( (URIRef(User.create_id(parsed["object"])), RDF.type, EX["class"]) )
-
-            for _ in range(self.complexity):
-                inference = self.infer_related_skill("dislikes the class", parsed["object"])
-                try:
-                    user_graph.add( (URIRef(User.create_id(parsed["object"])), EX["work_on"], EX[reformat(inference["object"])]) )
-                    user_graph.add( (EX[reformat(inference["object"])], EX["reliability"], EX["accuracy_level_0"]) )
-                except:
-                    print(f"Something went wrong here: {inference}")
-
-        else:
-            course = random.choice(disliked_classes)
-            course_name = unformat(str(course))
-
-            if random.choice(("class focus", "skill focus")) == "class focus":
-                #print("CLASS FOCUS chosen.")
-                templates = questions["personalized_follow_ups"][1]["templates"]
-                personalized_question = random.choice(templates).format(object = course_name)
-            else:
-                #print("SKILL FOCUS chosen.")
-                skills = list(user_graph.objects(course, EX["work_on"]))
-                focus_skill = random.choice(skills)
-                templates = questions["personalized_follow_ups"][3]["templates"]
-                personalized_question = random.choice(templates).format(disliked_class = course_name, skill = unformat(focus_skill))
-
-            response = self.trans_input(current_user.get_id(), personalized_question + " ")
-            if ("seem accurate" in personalized_question):
-                improvement_score = 50 # TODO: Make the improvement score variable based on the response. This variation may come from Primer.parse_yes_or_no
-                affirm = p.parse_yes_or_no(response)
-                old_accuracy = int( list(user_graph.objects(focus_skill, EX["reliability"]))[0].split("/")[-1].split("_")[-1] )
-
-                new_accuracy = (old_accuracy + improvement_score) if "yes" in affirm["answer"].lower() else (old_accuracy - improvement_score)
-
-                user_graph.remove((focus_skill, EX["reliability"], EX[f"accuracy_level_{old_accuracy}"]))
-                user_graph.add((focus_skill, EX["reliability"], EX[f"accuracy_level_{new_accuracy}"]))
-    '''
 
 
 
@@ -501,11 +598,53 @@ class Primer:
 
         for _ in range(self.complexity):
             inference = self.infer_related_skill("has interest in", parsed["object"])
-            try:
-                user_graph.add( (URIRef(User.create_id(parsed["object"])), EX[f"interest_infers"], EX[reformat(inference["object"])]) )
-                #user_graph.add( (URIRef(User.create_id(parsed["object"])), EX[f"SKILL_{user}_{reformat(inference["predicate"])}"], EX[reformat(inference["object"])]) )
-            except:
-                print(f"Something went wrong here: {inference}")
+            user_graph.add( (URIRef(User.create_id(parsed["object"])), EX[f"has_skill"], EX[reformat(inference["object"])]) )
+            user_graph.add( (EX[reformat(inference["object"])], EX["reliability"], EX["accuracy_level_0"]) )
+
+    def expand_interest_knowledge(self, current_user):
+        """
+        Generates and asks a (pre-formatted) follow-up question about one of the user's interests
+        """
+        interests = list(user_graph.objects(current_user.get_id(), EX["interested_in"]))
+
+        interest = random.choice(interests)
+        interest_name = unformat(str(interest))
+
+        templates = questions["personalized_follow_ups"][2]["fixed_templates"]
+        formatted_question = templates[0].format(interested_in = interest_name)
+
+        response = self.trans_input(current_user.get_id(), formatted_question + " ")
+        parsed = self.parse_user_input(response)
+
+        user_graph.add((interest, EX["involves"], EX[reformat(parsed["object"])]))
+
+    def reinforce_interest_skills(self, current_user):
+        """
+        Gauges the accuracy of the inferred skills related to classes the user disliked.
+        Tells the user one of the inferred skills related to one of those classes and asks a closed-ended question (yes/no) to determine the accuracy of the inference.
+        """
+        interests = list(user_graph.objects(current_user.get_id(), EX["interested_in"]))
+
+        interest = random.choice(interests)
+        interest_name = unformat(str(interest))
+        skills = list(user_graph.objects(interest, EX["has_skill"]))
+        focus_skill = random.choice(skills)
+
+        templates = questions["personalized_follow_ups"][2]["fixed_templates"]
+        formatted_question = templates[1].format(interested_in = interest_name, interest_infers = unformat(focus_skill))
+        response = self.trans_input(current_user.get_id(), formatted_question + " ")
+
+        affirm = p.parse_yes_or_no(response)
+        print(affirm)
+        improvement_score = affirm["degree"] # TODO: Make the improvement score variable based on the response. This variation may come from Primer.parse_yes_or_no
+        old_accuracy = int( list(user_graph.objects(focus_skill, EX["reliability"]))[0].split("/")[-1].split("_")[-1] )
+
+        new_accuracy = old_accuracy + improvement_score
+
+        user_graph.remove((focus_skill, EX["reliability"], EX[f"accuracy_level_{old_accuracy}"]))
+        user_graph.add((focus_skill, EX["reliability"], EX[f"accuracy_level_{new_accuracy}"]))
+
+
 
     def set_fixed_state(self, current_user, state):
         print("Static mode activated!")
@@ -518,7 +657,9 @@ class Primer:
             "reinforce weak skill accuracy": self.reinforce_disliked_class_skills,
             "learn more about disliked class": self.expand_disliked_class_knowledge,
 
-            "find interest": self.find_interest_state
+            "find interest": self.find_interest_state,
+            "reinforce interest accuracy": self.reinforce_interest_skills,
+            "learn more about interest": self.expand_interest_knowledge,
         }
         action[state](current_user)
         return list(action.keys()).index(state)
@@ -550,15 +691,31 @@ if __name__ == "__main__":
     print("First time user! Let's get started." if user.is_first_time_user else f"Welcome back, {user}! Let's get started.")
 
     p = Primer()
-    # self.focuses = (
+    # focus_number = (
     #   0 : "enjoyed_class",
     #   1 : "disliked_class",
     #   2 : "interest",
     #   3 : "skill_to_improve"
     # )
+    '''
+    actions = (
+        "find classes enjoyed",
+        "reinforce strong skill accuracy",
+        "learn more about enjoyed class",
 
-    #p.set_fixed_state(user, "reinforce strong skill accuracy")
-    p.set_dynamic_state(user, "generate personalized question", focus_number = 0)
+        "find classes disliked",
+        "reinforce weak skill accuracy",
+        "learn more about disliked class",
+
+        "find interest",
+        "reinforce interest accuracy",
+        "learn more about interest"
+    )
+    '''
+    #print(p.parse_yes_or_no("Wait, no, that's not right at all."))
+    #p.set_fixed_state(user, "reinforce interest accuracy")
+    #print(p.get_skill_accuracies(user))
+    p.set_dynamic_state(user, "generate personalized question", focus_number = 2)
     # print(p.similarity_score("What specific aspects of procedural learning make it more engaging for you than interpreting abstract ideas?",
     #                          "What specific aspects of procedural learning make you feel more confident in your ability to master a subject?"))
     user_graph.serialize(destination = "user_graph.ttl", format = "turtle")
@@ -566,43 +723,3 @@ if __name__ == "__main__":
 
     visualizer.visualize_graph(user_graph)
     export_chat_log(transcript)
-
-
-
-
-# TODO: Use existing data in RDF to generate new questions
-
-
-
-
-
-
-
-
-
-
-'''
-def generate_questions(predicate):
-    response = client.chat.completions.create(
-        model="meta-llama/llama-3-8b-instruct", # Choose any model from OpenRouter
-        messages=[
-            {"role": "system", "content": "You are a helpful assistant assisting a developer with a database project."},
-            {"role": "user", "content": f"Create one natural question to ask a student to find out their '{predicate}' to learn more about them. Provide the one question and nothing else; do not mention the database."}
-        ]
-    )
-    return response.choices[0].message.content
-
-# Example usage for your "add_experience" logic
-question = generate_questions("favoriteSubject")
-print(f"Generated Question: {question}")
-'''
-
-'''
-for s, p, o in g:
-    print(f"Subject: {s} | Predicate: {p} | Object: {o}")
-'''
-'''
-for person in g.subjects(RDF.type, FOAF.Person):
-    name = g.value(person, FOAF.name)
-    print(f"Found person: {person}, whose name is {name}.")
-'''

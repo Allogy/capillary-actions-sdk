@@ -4,50 +4,75 @@
 ns1:all_users a foaf:Group ;
     foaf:member ns1:malakhi .
 
-ns1:basic_understanding_of_biological_systems ns1:reliability ns1:accuracy_level_50 .
+ns1:academic_disengagement ns1:reliability ns1:accuracy_level_-30 .
 
-ns1:british_literature ns1:reliability ns1:accuracy_level_0 .
+ns1:basic_understanding_of_biological_systems ns1:reliability ns1:accuracy_level_130 .
+
+ns1:british_literature ns1:reliability ns1:accuracy_level_90 .
 
 ns1:british_literature_class_in_high_school a ns1:class ;
     ns1:work_on ns1:british_literature,
         ns1:patience,
         ns1:tolerance .
 
-ns1:curiosity ns1:reliability ns1:accuracy_level_100 .
+ns1:curiosity ns1:reliability ns1:accuracy_level_130 .
 
-ns1:empathy ns1:reliability ns1:accuracy_level_0 .
+ns1:digital_media_production ns1:reliability ns1:accuracy_level_30 .
 
-ns1:intercultural_competency ns1:reliability ns1:accuracy_level_0 .
+ns1:editing_videos a ns1:interest ;
+    ns1:has_skill ns1:digital_media_production,
+        ns1:visual_storytelling ;
+    ns1:involves ns1:taking_photos_and_videos_and_creatively_stringing_them_together_to_make_something_exciting .
+
+ns1:empathy ns1:reliability ns1:accuracy_level_-55 .
+
+ns1:intercultural_competency ns1:reliability ns1:accuracy_level_80 .
 
 ns1:introductory_biology_class a ns1:class ;
     ns1:has_skill ns1:basic_understanding_of_biological_systems,
         ns1:curiosity,
-        ns1:scientific_curiosity .
+        ns1:scientific_curiosity ;
+    ns1:involves ns1:cell_signaling .
 
 ns1:lifespan_development_class a ns1:class ;
+    ns1:involves ns1:a_lot_of_reading,
+        ns1:old-fashioned ;
     ns1:work_on ns1:empathy,
         ns1:preference_for_quantitative_subjects .
 
 ns1:malakhi a foaf:Person ;
     foaf:name "Malakhi" ;
     ns1:dislikes_class ns1:british_literature_class_in_high_school,
-        ns1:lifespan_development_class ;
+        ns1:lifespan_development_class,
+        ns1:pre-calculus_class ;
     ns1:enjoys_class ns1:introductory_biology_class,
         ns1:physics_ii_class,
-        ns1:social_justice_in_spanish-speaking_countries_class .
+        ns1:social_justice_in_spanish-speaking_countries_class ;
+    ns1:interested_in ns1:editing_videos,
+        ns1:minecraft .
 
 ns1:mathematical_reasoning ns1:reliability ns1:accuracy_level_0 .
 
-ns1:patience ns1:reliability ns1:accuracy_level_-50 .
+ns1:minecraft a ns1:interest ;
+    ns1:has_skill ns1:spatial_reasoning,
+        ns1:systemic_thinking .
+
+ns1:patience ns1:reliability ns1:accuracy_level_-115 .
 
 ns1:physics_ii_class a ns1:class ;
     ns1:has_skill ns1:mathematical_reasoning,
         ns1:scientific_curiosity,
         ns1:scientific_interest .
 
-ns1:preference_for_quantitative_subjects ns1:reliability ns1:accuracy_level_0 .
+ns1:pre-calculus_class a ns1:class ;
+    ns1:involves ns1:trig_substitutions ;
+    ns1:work_on ns1:academic_disengagement,
+        ns1:subjective_aversion,
+        ns1:subjective_preference .
 
-ns1:scientific_interest ns1:reliability ns1:accuracy_level_0 .
+ns1:preference_for_quantitative_subjects ns1:reliability ns1:accuracy_level_10 .
+
+ns1:scientific_interest ns1:reliability ns1:accuracy_level_50 .
 
 ns1:social_justice_in_spanish-speaking_countries_class a ns1:class ;
     ns1:has_skill ns1:intercultural_competency,
@@ -56,9 +81,19 @@ ns1:social_justice_in_spanish-speaking_countries_class a ns1:class ;
 
 ns1:sociopolitical_awareness ns1:reliability ns1:accuracy_level_0 .
 
-ns1:sociopolitical_empathy ns1:reliability ns1:accuracy_level_0 .
+ns1:sociopolitical_empathy ns1:reliability ns1:accuracy_level_45 .
 
-ns1:tolerance ns1:reliability ns1:accuracy_level_0 .
+ns1:spatial_reasoning ns1:reliability ns1:accuracy_level_45 .
+
+ns1:subjective_aversion ns1:reliability ns1:accuracy_level_0 .
+
+ns1:subjective_preference ns1:reliability ns1:accuracy_level_-30 .
+
+ns1:systemic_thinking ns1:reliability ns1:accuracy_level_30 .
+
+ns1:tolerance ns1:reliability ns1:accuracy_level_-65 .
+
+ns1:visual_storytelling ns1:reliability ns1:accuracy_level_30 .
 
 ns1:scientific_curiosity ns1:reliability ns1:accuracy_level_50 .
 

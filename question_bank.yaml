@@ -36,18 +36,29 @@ personalized_follow_ups:
     an abstract concept?
   - When you are studying a complex biological procedure, how do you typically approach
     a step that isn't immediately clear?
+  - What specifically about the lack of a clear procedure in Lifespan Development
+    made the subject difficult for you?
+  - What was it about the social justice class that made it feel more meaningful to
+    you than your other subjects?
 - condition: interest
   trigger_predicates:
   - interested_in
   - interest_infers
   - academically_relates_to
   fixed_templates:
+  - Remember when you told me about your interest in {interested_in}? What exactly
+    about {interested_in} interests you?
   - Alright, so you seem pretty interested in {interested_in}, and I'm assuming this
     means you're pretty good at {interest_infers}. Does this seem accurate?
   - I think you might be good at {academically_relates_to} based on your ability to
     {interest_infers}. Does this seem accurate?
   dynamic_templates:
-  - null
+  - How might your interest in the procedural nature of science and your creative
+    drive in video editing intersect?
+  - When you are editing videos, what specific part of the "stringing together" process
+    do you find most rewarding?
+  - How do you use the systemic thinking or building mechanics in Minecraft to approach
+    your video editing projects?
 - condition: skill_to_improve
   trigger_predicate:
   - work_on

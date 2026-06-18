@@ -211,3 +211,503 @@ trans:msg_2026-05-31T20-23-47.716913 a trans:Message ;
     trans:text "Really good question! I think I enjoyed learning about something that had a real-world impact on people across the world." ;
     trans:timestamp "2026-05-31T20:23:47.716913"^^xsd:dateTime .
 
+trans:msg_2026-06-03T09-52-39.601035 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Alright, so you seem pretty interested in social justice in spanish-speaking countries class, and I'm assuming this means you're pretty good at intercultural competency. Does this seem accurate? " ;
+    trans:timestamp "2026-06-03T09:52:39.601035"^^xsd:dateTime .
+
+trans:msg_2026-06-03T09-52-39.601606 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "Yeah, that seems about right!" ;
+    trans:timestamp "2026-06-03T09:52:39.601606"^^xsd:dateTime .
+
+trans:msg_2026-06-03T09-53-33.035137 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Alright, so you seem pretty interested in social justice in spanish-speaking countries class, and I'm assuming this means you're pretty good at sociopolitical empathy. Does this seem accurate? " ;
+    trans:timestamp "2026-06-03T09:53:33.035137"^^xsd:dateTime .
+
+trans:msg_2026-06-03T09-53-33.036650 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "I think so..." ;
+    trans:timestamp "2026-06-03T09:53:33.036650"^^xsd:dateTime .
+
+trans:msg_2026-06-03T10-22-08.229986 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Alright, so you seem pretty interested in social justice in spanish-speaking countries class, and I'm assuming this means you're pretty good at sociopolitical empathy. Does this seem accurate? " ;
+    trans:timestamp "2026-06-03T10:22:08.229986"^^xsd:dateTime .
+
+trans:msg_2026-06-03T10-22-08.243135 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "Yeah, I think so." ;
+    trans:timestamp "2026-06-03T10:22:08.243135"^^xsd:dateTime .
+
+trans:msg_2026-06-03T10-22-57.175612 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Alright, so you seem pretty interested in physics ii class, and I'm assuming this means you're pretty good at scientific interest. Does this seem accurate? " ;
+    trans:timestamp "2026-06-03T10:22:57.175612"^^xsd:dateTime .
+
+trans:msg_2026-06-03T10-22-57.176904 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "I think so, yeah." ;
+    trans:timestamp "2026-06-03T10:22:57.176904"^^xsd:dateTime .
+
+trans:msg_2026-06-03T10-24-13.884326 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Alright, so you seem pretty interested in introductory biology class, and I'm assuming this means you're pretty good at basic understanding of biological systems. Does this seem accurate? " ;
+    trans:timestamp "2026-06-03T10:24:13.884326"^^xsd:dateTime .
+
+trans:msg_2026-06-03T10-24-13.884960 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "Sort of, yeah." ;
+    trans:timestamp "2026-06-03T10:24:13.884960"^^xsd:dateTime .
+
+trans:msg_2026-06-03T10-24-54.240290 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Alright, so you seem pretty interested in social justice in spanish-speaking countries class, and I'm assuming this means you're pretty good at intercultural competency. Does this seem accurate? " ;
+    trans:timestamp "2026-06-03T10:24:54.240290"^^xsd:dateTime .
+
+trans:msg_2026-06-03T10-24-54.241523 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "I thyeah!" ;
+    trans:timestamp "2026-06-03T10:24:54.241523"^^xsd:dateTime .
+
+trans:msg_2026-06-03T20-41-24.034173 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Ok, you said you don't really like lifespan development class. Because of this, I'm assuming you might have trouble with preference for quantitative subjects. Does this seem accurate? " ;
+    trans:timestamp "2026-06-03T20:41:24.034173"^^xsd:dateTime .
+
+trans:msg_2026-06-03T20-41-24.035446 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "Sort of, yeah." ;
+    trans:timestamp "2026-06-03T20:41:24.035446"^^xsd:dateTime .
+
+trans:msg_2026-06-03T20-42-28.144773 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "From our conversation, I think you might need to work on empathy because of your experience in lifespan development class. Does this seem accurate? " ;
+    trans:timestamp "2026-06-03T20:42:28.144773"^^xsd:dateTime .
+
+trans:msg_2026-06-03T20-42-28.144965 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "Wait, no, that's not right at all." ;
+    trans:timestamp "2026-06-03T20:42:28.144965"^^xsd:dateTime .
+
+trans:msg_2026-06-03T20-44-50.845768 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Ok, you said you don't really like british literature class in high school. Because of this, I'm assuming you might have trouble with british literature. Does this seem accurate? " ;
+    trans:timestamp "2026-06-03T20:44:50.845768"^^xsd:dateTime .
+
+trans:msg_2026-06-03T20-44-50.846263 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "Yeah, that would make sense." ;
+    trans:timestamp "2026-06-03T20:44:50.846263"^^xsd:dateTime .
+
+trans:msg_2026-06-03T20-45-35.676823 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Ok, you said you don't really like british literature class in high school. Because of this, I'm assuming you might have trouble with british literature. Does this seem accurate? " ;
+    trans:timestamp "2026-06-03T20:45:35.676823"^^xsd:dateTime .
+
+trans:msg_2026-06-03T20-45-35.677381 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "Yeah, that would make sense." ;
+    trans:timestamp "2026-06-03T20:45:35.677381"^^xsd:dateTime .
+
+trans:msg_2026-06-03T20-46-05.307179 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Ok, you said you don't really like british literature class in high school. Because of this, I'm assuming you might have trouble with british literature. Does this seem accurate? " ;
+    trans:timestamp "2026-06-03T20:46:05.307179"^^xsd:dateTime .
+
+trans:msg_2026-06-03T20-46-05.307603 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "cd \"/Users/mrsro/Desktop/MIT Files/[UROP] Primer Project\"" ;
+    trans:timestamp "2026-06-03T20:46:05.307603"^^xsd:dateTime .
+
+trans:msg_2026-06-03T20-46-32.569366 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Ok, you said you don't really like british literature class in high school. Because of this, I'm assuming you might have trouble with patience. Does this seem accurate? " ;
+    trans:timestamp "2026-06-03T20:46:32.569366"^^xsd:dateTime .
+
+trans:msg_2026-06-03T20-46-32.570321 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "No, that's not right at all." ;
+    trans:timestamp "2026-06-03T20:46:32.570321"^^xsd:dateTime .
+
+trans:msg_2026-06-03T20-47-18.830987 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Ok, you said you don't really like lifespan development class. Because of this, I'm assuming you might have trouble with empathy. Does this seem accurate? " ;
+    trans:timestamp "2026-06-03T20:47:18.830987"^^xsd:dateTime .
+
+trans:msg_2026-06-03T20-47-18.831729 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "No, that's not right at all!" ;
+    trans:timestamp "2026-06-03T20:47:18.831729"^^xsd:dateTime .
+
+trans:msg_2026-06-03T20-50-01.385640 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Ok, you said you don't really like british literature class in high school. Because of this, I'm assuming you might have trouble with patience. Does this seem accurate? " ;
+    trans:timestamp "2026-06-03T20:50:01.385640"^^xsd:dateTime .
+
+trans:msg_2026-06-03T20-50-01.386534 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "No, that's not right at all." ;
+    trans:timestamp "2026-06-03T20:50:01.386534"^^xsd:dateTime .
+
+trans:msg_2026-06-03T20-51-01.337745 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Ok, you said you don't really like lifespan development class. Because of this, I'm assuming you might have trouble with empathy. Does this seem accurate? " ;
+    trans:timestamp "2026-06-03T20:51:01.337745"^^xsd:dateTime .
+
+trans:msg_2026-06-03T20-51-01.338461 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "No, that's not right at all." ;
+    trans:timestamp "2026-06-03T20:51:01.338461"^^xsd:dateTime .
+
+trans:msg_2026-06-03T20-51-13.636512 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Ok, you said you don't really like lifespan development class. Because of this, I'm assuming you might have trouble with empathy. Does this seem accurate? " ;
+    trans:timestamp "2026-06-03T20:51:13.636512"^^xsd:dateTime .
+
+trans:msg_2026-06-03T20-51-13.637320 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "Nope, that's completely false." ;
+    trans:timestamp "2026-06-03T20:51:13.637320"^^xsd:dateTime .
+
+trans:msg_2026-06-03T20-51-36.776235 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "From our conversation, I think you might need to work on preference for quantitative subjects because of your experience in lifespan development class. Does this seem accurate? " ;
+    trans:timestamp "2026-06-03T20:51:36.776235"^^xsd:dateTime .
+
+trans:msg_2026-06-03T20-51-36.776858 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "Yeah, that might be true..." ;
+    trans:timestamp "2026-06-03T20:51:36.776858"^^xsd:dateTime .
+
+trans:msg_2026-06-03T20-51-52.922742 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Ok, you said you don't really like british literature class in high school. Because of this, I'm assuming you might have trouble with tolerance. Does this seem accurate? " ;
+    trans:timestamp "2026-06-03T20:51:52.922742"^^xsd:dateTime .
+
+trans:msg_2026-06-03T20-51-52.923225 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "I don't think that's true." ;
+    trans:timestamp "2026-06-03T20:51:52.923225"^^xsd:dateTime .
+
+trans:msg_2026-06-03T20-52-04.805349 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Ok, you said you don't really like british literature class in high school. Because of this, I'm assuming you might have trouble with tolerance. Does this seem accurate? " ;
+    trans:timestamp "2026-06-03T20:52:04.805349"^^xsd:dateTime .
+
+trans:msg_2026-06-03T20-52-04.806165 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "No, I don't think that's true." ;
+    trans:timestamp "2026-06-03T20:52:04.806165"^^xsd:dateTime .
+
+trans:msg_2026-06-03T20-52-16.538843 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "From our conversation, I think you might need to work on empathy because of your experience in lifespan development class. Does this seem accurate? " ;
+    trans:timestamp "2026-06-03T20:52:16.538843"^^xsd:dateTime .
+
+trans:msg_2026-06-03T20-52-16.539314 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "No, that's completely false." ;
+    trans:timestamp "2026-06-03T20:52:16.539314"^^xsd:dateTime .
+
+trans:msg_2026-06-03T20-52-28.664077 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Ok, you said you don't really like lifespan development class. Because of this, I'm assuming you might have trouble with preference for quantitative subjects. Does this seem accurate? " ;
+    trans:timestamp "2026-06-03T20:52:28.664077"^^xsd:dateTime .
+
+trans:msg_2026-06-03T20-52-28.664524 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "Maybe... I'm not sure." ;
+    trans:timestamp "2026-06-03T20:52:28.664524"^^xsd:dateTime .
+
+trans:msg_2026-06-03T20-52-43.739114 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "From our conversation, I think you might need to work on patience because of your experience in british literature class in high school. Does this seem accurate? " ;
+    trans:timestamp "2026-06-03T20:52:43.739114"^^xsd:dateTime .
+
+trans:msg_2026-06-03T20-52-43.739467 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "No, I don't think that's right." ;
+    trans:timestamp "2026-06-03T20:52:43.739467"^^xsd:dateTime .
+
+trans:msg_2026-06-03T20-52-58.808227 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "From our conversation, I think you might need to work on patience because of your experience in british literature class in high school. Does this seem accurate? " ;
+    trans:timestamp "2026-06-03T20:52:58.808227"^^xsd:dateTime .
+
+trans:msg_2026-06-03T20-52-58.809612 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "No, I don't think that's accurate." ;
+    trans:timestamp "2026-06-03T20:52:58.809612"^^xsd:dateTime .
+
+trans:msg_2026-06-03T20-53-08.287225 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Ok, you said you don't really like british literature class in high school. Because of this, I'm assuming you might have trouble with british literature. Does this seem accurate? " ;
+    trans:timestamp "2026-06-03T20:53:08.287225"^^xsd:dateTime .
+
+trans:msg_2026-06-03T20-53-08.287806 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "Yeah, that makes sense." ;
+    trans:timestamp "2026-06-03T20:53:08.287806"^^xsd:dateTime .
+
+trans:msg_2026-06-03T20-54-00.456547 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Alright, so you seem pretty interested in introductory biology class, and I'm assuming this means you're pretty good at basic understanding of biological systems. Does this seem accurate? " ;
+    trans:timestamp "2026-06-03T20:54:00.456547"^^xsd:dateTime .
+
+trans:msg_2026-06-03T20-54-00.457028 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "I think so, yeah!" ;
+    trans:timestamp "2026-06-03T20:54:00.457028"^^xsd:dateTime .
+
+trans:msg_2026-06-03T20-54-24.040642 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Alright, so you seem pretty interested in social justice in spanish-speaking countries class, and I'm assuming this means you're pretty good at sociopolitical empathy. Does this seem accurate? " ;
+    trans:timestamp "2026-06-03T20:54:24.040642"^^xsd:dateTime .
+
+trans:msg_2026-06-03T20-54-24.041240 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "That seems about right, yeah!" ;
+    trans:timestamp "2026-06-03T20:54:24.041240"^^xsd:dateTime .
+
+trans:msg_2026-06-03T20-54-49.538827 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Alright, so you seem pretty interested in introductory biology class, and I'm assuming this means you're pretty good at curiosity. Does this seem accurate? " ;
+    trans:timestamp "2026-06-03T20:54:49.538827"^^xsd:dateTime .
+
+trans:msg_2026-06-03T20-54-49.539124 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "Yeah!" ;
+    trans:timestamp "2026-06-03T20:54:49.539124"^^xsd:dateTime .
+
+trans:msg_2026-06-03T21-03-15.816185 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Alright, so you seem pretty interested in introductory biology class, and I'm assuming this means you're pretty good at basic understanding of biological systems. Does this seem accurate? " ;
+    trans:timestamp "2026-06-03T21:03:15.816185"^^xsd:dateTime .
+
+trans:msg_2026-06-03T21-03-15.818256 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "I think so, yeah." ;
+    trans:timestamp "2026-06-03T21:03:15.818256"^^xsd:dateTime .
+
+trans:msg_2026-06-05T20-19-41.193220 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Alright, you were telling me about introductory biology class. What's your favorite topic of introductory biology class? " ;
+    trans:timestamp "2026-06-05T20:19:41.193220"^^xsd:dateTime .
+
+trans:msg_2026-06-05T20-19-41.195119 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "I really enjoyed learning about cell signaling!" ;
+    trans:timestamp "2026-06-05T20:19:41.195119"^^xsd:dateTime .
+
+trans:msg_2026-06-05T20-21-48.538019 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "If I understood correctly, you're not a big fan of lifespan development class. Can you tell me why that is? " ;
+    trans:timestamp "2026-06-05T20:21:48.538019"^^xsd:dateTime .
+
+trans:msg_2026-06-05T20-21-48.539619 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "It was a lot of reading." ;
+    trans:timestamp "2026-06-05T20:21:48.539619"^^xsd:dateTime .
+
+trans:msg_2026-06-05T20-25-24.793930 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "If I understood correctly, you're not a big fan of lifespan development class. Can you tell me why that is? " ;
+    trans:timestamp "2026-06-05T20:25:24.793930"^^xsd:dateTime .
+
+trans:msg_2026-06-05T20-25-24.794306 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "The class involved a lot of reading." ;
+    trans:timestamp "2026-06-05T20:25:24.794306"^^xsd:dateTime .
+
+trans:msg_2026-06-05T20-50-21.174978 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Alright, Malakhi! Tell me about another class you dislike: " ;
+    trans:timestamp "2026-06-05T20:50:21.174978"^^xsd:dateTime .
+
+trans:msg_2026-06-05T20-50-21.180153 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "I didn't really like my pre-calculus class." ;
+    trans:timestamp "2026-06-05T20:50:21.180153"^^xsd:dateTime .
+
+trans:msg_2026-06-05T20-51-50.828863 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Ok, you said you don't really like pre-calculus class. Because of this, I'm assuming you might have trouble with academic disengagement. Does this seem accurate? " ;
+    trans:timestamp "2026-06-05T20:51:50.828863"^^xsd:dateTime .
+
+trans:msg_2026-06-05T20-51-50.829396 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "No, that's not right." ;
+    trans:timestamp "2026-06-05T20:51:50.829396"^^xsd:dateTime .
+
+trans:msg_2026-06-05T20-52-40.558636 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Ok, you said you don't really like pre-calculus class. Because of this, I'm assuming you might have trouble with subjective preference. Does this seem accurate? " ;
+    trans:timestamp "2026-06-05T20:52:40.558636"^^xsd:dateTime .
+
+trans:msg_2026-06-05T20-52-40.559388 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "Uh... no, that's not right." ;
+    trans:timestamp "2026-06-05T20:52:40.559388"^^xsd:dateTime .
+
+trans:msg_2026-06-05T20-54-14.713494 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "So I take it you aren't the biggest fan of pre-calculus class. What about pre-calculus class don't you like? " ;
+    trans:timestamp "2026-06-05T20:54:14.713494"^^xsd:dateTime .
+
+trans:msg_2026-06-05T20-54-14.713800 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "I didn't really like doing trig substitutions." ;
+    trans:timestamp "2026-06-05T20:54:14.713800"^^xsd:dateTime .
+
+trans:msg_2026-06-05T22-06-49.195592 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "What specifically about the lack of a clear procedure in Lifespan Development made the subject difficult for you? " ;
+    trans:timestamp "2026-06-05T22:06:49.195592"^^xsd:dateTime .
+
+trans:msg_2026-06-05T22-06-49.197853 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "Good question! The work was more subjective, so I was sometimes unsure of what a correct answer would look like." ;
+    trans:timestamp "2026-06-05T22:06:49.197853"^^xsd:dateTime .
+
+trans:msg_2026-06-12T15-53-24.778424 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "What was it about the social justice class that made it feel more meaningful to you than your other subjects? " ;
+    trans:timestamp "2026-06-12T15:53:24.778424"^^xsd:dateTime .
+
+trans:msg_2026-06-12T15-53-24.782443 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "The social justice class directly showed me the impact of what I was learning on real people; I ga disconnect in that sense with other classes." ;
+    trans:timestamp "2026-06-12T15:53:24.782443"^^xsd:dateTime .
+
+trans:msg_2026-06-12T15-56-41.632554 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "So I take it you aren't the biggest fan of lifespan development class. What about lifespan development class don't you like? " ;
+    trans:timestamp "2026-06-12T15:56:41.632554"^^xsd:dateTime .
+
+trans:msg_2026-06-12T15-56-41.635906 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "The class was very old-fashioned and involved a lot of handwriting." ;
+    trans:timestamp "2026-06-12T15:56:41.635906"^^xsd:dateTime .
+
+trans:msg_2026-06-12T15-59-01.423131 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "From our conversation, I think you might need to work on preference for quantitative subjects because of your experience in lifespan development class. Does this seem accurate? " ;
+    trans:timestamp "2026-06-12T15:59:01.423131"^^xsd:dateTime .
+
+trans:msg_2026-06-12T15-59-01.425139 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "I don't really think so." ;
+    trans:timestamp "2026-06-12T15:59:01.425139"^^xsd:dateTime .
+
+trans:msg_2026-06-12T16-02-24.757270 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Alright, Malakhi! Tell me about something you're interested in: " ;
+    trans:timestamp "2026-06-12T16:02:24.757270"^^xsd:dateTime .
+
+trans:msg_2026-06-12T16-02-24.757610 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "I'm pretty interested in editing videos!" ;
+    trans:timestamp "2026-06-12T16:02:24.757610"^^xsd:dateTime .
+
+trans:msg_2026-06-12T16-36-47.912750 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Alright, Malakhi! Tell me about something you're interested in: " ;
+    trans:timestamp "2026-06-12T16:36:47.912750"^^xsd:dateTime .
+
+trans:msg_2026-06-12T16-36-47.913344 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "I'm interested in editing videos!" ;
+    trans:timestamp "2026-06-12T16:36:47.913344"^^xsd:dateTime .
+
+trans:msg_2026-06-12T16-49-04.690159 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Alright, so you seem pretty interested in editing videos, and I'm assuming this means you're pretty good at digital media production. Does this seem accurate? " ;
+    trans:timestamp "2026-06-12T16:49:04.690159"^^xsd:dateTime .
+
+trans:msg_2026-06-12T16-49-04.690747 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "Sort of, yeah!" ;
+    trans:timestamp "2026-06-12T16:49:04.690747"^^xsd:dateTime .
+
+trans:msg_2026-06-12T16-51-04.587344 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Remember when you told me about your interest in editing videos? What exactly about editing videos interests you? " ;
+    trans:timestamp "2026-06-12T16:51:04.587344"^^xsd:dateTime .
+
+trans:msg_2026-06-12T16-51-04.587926 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "I like being able to take photos and videos and creatively string them together to make something exciting." ;
+    trans:timestamp "2026-06-12T16:51:04.587926"^^xsd:dateTime .
+
+trans:msg_2026-06-13T13-50-17.410719 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "How might your interest in the procedural nature of science and your creative drive in video editing intersect? " ;
+    trans:timestamp "2026-06-13T13:50:17.410719"^^xsd:dateTime .
+
+trans:msg_2026-06-13T13-50-17.424335 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "Great question! I think both involve stringing pieces of information together in a coherent way, whether it be new scientific facts or video/audio files." ;
+    trans:timestamp "2026-06-13T13:50:17.424335"^^xsd:dateTime .
+
+trans:msg_2026-06-13T13-56-58.727623 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "When you are editing videos, what specific part of the \"stringing together\" process do you find most rewarding? " ;
+    trans:timestamp "2026-06-13T13:56:58.727623"^^xsd:dateTime .
+
+trans:msg_2026-06-13T13-56-58.729313 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "Seeing the photos and videos I'm working with come together in the end into something exciting is my favorite p" ;
+    trans:timestamp "2026-06-13T13:56:58.729313"^^xsd:dateTime .
+
+trans:msg_2026-06-13T14-06-22.882399 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Alright, Malakhi! Tell me about something you're interested in: " ;
+    trans:timestamp "2026-06-13T14:06:22.882399"^^xsd:dateTime .
+
+trans:msg_2026-06-13T14-06-22.883704 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "I'm interested in playing Minecraft!" ;
+    trans:timestamp "2026-06-13T14:06:22.883704"^^xsd:dateTime .
+
+trans:msg_2026-06-13T14-39-02.655366 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Alright, so you seem pretty interested in editing videos, and I'm assuming this means you're pretty good at visual storytelling. Does this seem accurate? " ;
+    trans:timestamp "2026-06-13T14:39:02.655366"^^xsd:dateTime .
+
+trans:msg_2026-06-13T14-39-02.655786 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "Yeah, I think so!" ;
+    trans:timestamp "2026-06-13T14:39:02.655786"^^xsd:dateTime .
+
+trans:msg_2026-06-13T14-39-29.392048 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Alright, so you seem pretty interested in minecraft, and I'm assuming this means you're pretty good at spatial reasoning. Does this seem accurate? " ;
+    trans:timestamp "2026-06-13T14:39:29.392048"^^xsd:dateTime .
+
+trans:msg_2026-06-13T14-39-29.392358 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "Yeah, that seems about right!" ;
+    trans:timestamp "2026-06-13T14:39:29.392358"^^xsd:dateTime .
+
+trans:msg_2026-06-13T14-40-26.446595 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "Alright, so you seem pretty interested in minecraft, and I'm assuming this means you're pretty good at systemic thinking. Does this seem accurate? " ;
+    trans:timestamp "2026-06-13T14:40:26.446595"^^xsd:dateTime .
+
+trans:msg_2026-06-13T14-40-26.446836 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "I think so" ;
+    trans:timestamp "2026-06-13T14:40:26.446836"^^xsd:dateTime .
+
+trans:msg_2026-06-13T14-43-33.392108 a trans:Message ;
+    trans:speaker trans:primer_bot ;
+    trans:text "How do you use the systemic thinking or building mechanics in Minecraft to approach your video editing projects? " ;
+    trans:timestamp "2026-06-13T14:43:33.392108"^^xsd:dateTime .
+
+trans:msg_2026-06-13T14-43-33.394002 a trans:Message ;
+    trans:speaker trans:malakhi ;
+    trans:text "I use systemic thinking in my approach to stitching the video and audio files together, but the building mechanics aren't really related." ;
+    trans:timestamp "2026-06-13T14:43:33.394002"^^xsd:dateTime .
+
