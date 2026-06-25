@@ -1,5 +1,6 @@
 from __future__ import annotations
-from __init__ import *
+from pydantic import *
+import yaml
 
 reformat = lambda s: "_".join(s.lower().split())
 unformat = lambda s: s.split("/")[-1].replace("_", " ")
