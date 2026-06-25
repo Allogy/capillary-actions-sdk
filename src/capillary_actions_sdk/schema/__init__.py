@@ -1,5 +1,7 @@
-from pydantic import *
-import yaml
-import rdflib
-from rdflib import Graph, Literal, RDF, URIRef, Namespace
-from rdflib.namespace import FOAF, XSD
+from src.capillary_actions_sdk.schema.domain_schema import (
+    DimensionSpec,
+    KnowledgeBaseWiring,
+    DomainSchema,
+    load,
+    validate_memory_entry
+)
