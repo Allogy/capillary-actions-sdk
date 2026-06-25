@@ -1,0 +1,32 @@
+domain: education
+subject: learner
+dimensions:
+- name: history
+  fields:
+  - courses
+  - scores
+  write: event-driven
+  decay: none
+- name: affinities
+  fields:
+  - subject preferences
+  write: event-driven
+  decay: none
+- name: aspirations
+  fields:
+  - goals
+  - career
+  write: event-driven
+  decay: none
+- name: regula
+  fields:
+  - study_schedule
+  write: event-driven
+  decay: none
+knowledge_base:
+  kb_names:
+  - calculus_kg
+  retrieval: corrective_rag
+engagements:
+- tutor-concept
+- '...'
