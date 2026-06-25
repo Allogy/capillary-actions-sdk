@@ -461,6 +461,76 @@ class Primer:
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     # Primer states \/
 
+    # Attempt at refactoring the discover, expand_knowledge, and reinforce methods. Not in usage yet; still buggy and need more testing, but somewhat functional
+    def discover(self, current_user, predicate):
+        similar_objects = list(user_graph.objects(current_user.get_id(), EX[reformat(predicate)]))
+
+        response = self.trans_input(current_user.get_id(), self.grammar_check(f"Alright, {current_user}! Tell me about {"a" if len(similar_objects) == 0 else "another"} {predicate}: "))
+        parsed = self.parse_user_input(response)
+        current_user.add_experience(EX[reformat(predicate)], EX[reformat(parsed["object"])])
+
+        user_graph.add( (URIRef(User.create_id(parsed["object"])), RDF.type, EX["class"]) )
+
+        for _ in range(self.complexity):
+            inference = self.infer_related_skill(predicate, parsed["object"])
+            user_graph.add((URIRef(User.create_id(parsed["object"])), EX["related_to_skill"], EX[reformat(inference["object"])]))
+            user_graph.add( (EX[reformat(inference["object"])], EX["reliability"], EX["accuracy_level_0"]) )
+
+    def expand_knowledge(self, current_user, predicate):
+        similar_objects = list(user_graph.objects(current_user.get_id(), EX[reformat(predicate)]))
+
+        object = random.choice(similar_objects)
+        object_name = unformat(str(object))
+
+        # Checks if there is an existing spot in the YAML file for this predicate; otherwise, one is created
+        for i in range(len(questions["personalized_follow_ups"])):
+            if questions["personalized_follow_ups"][i]["condition"] == reformat(predicate):
+                templates = questions["personalized_follow_ups"][i]["fixed_templates"]
+        else:
+            new_group = {
+                'condition': reformat(predicate),
+                'trigger_predicate': reformat(predicate),
+                'fixed_templates': [f"Ok, you told me that you {predicate}" + " {object}. Why is this the case?"],
+                'dynamic_templates': []
+            }
+            questions["personalized_follow_ups"].append(new_group)
+            with open("question_bank.yaml", "w") as file:
+                yaml.dump(questions, file, default_flow_style = False, sort_keys = False)
+
+            templates = new_group["fixed_templates"]
+
+        #templates = questions["personalized_follow_ups"][0]["fixed_templates"]
+        formatted_question = random.choice(templates).format(object = object_name)
+
+        response = self.trans_input(current_user.get_id(), self.grammar_check(formatted_question) + " ")
+        parsed = self.parse_user_input(response)
+
+        user_graph.add((object, EX["involves"], EX[reformat(parsed["object"])]))
+
+    def reinforce(self, current_user, predicate):
+        similar_objects = list(user_graph.objects(current_user.get_id(), EX[reformat(predicate)]))
+
+        object = random.choice(similar_objects)
+        object_name = unformat(str(object))
+        skills = list(user_graph.objects(object, EX["related_to_skill"]))
+        focus_skill = random.choice(skills)
+
+        formatted_question = self.grammar_check(f"Remember when you were telling me about {object_name}? You mentioned that it was a {predicate}, and I assumed that it was related to {focus_skill}. Does this seem accurate?")
+
+        response = self.trans_input(current_user.get_id(), formatted_question + " ")
+
+        affirm = self.parse_yes_or_no(response)
+        #print(affirm)
+        improvement_score = affirm["degree"]
+        old_accuracy = int( list(user_graph.objects(focus_skill, EX["reliability"]))[0].split("/")[-1].split("_")[-1] )
+
+        new_accuracy = old_accuracy + improvement_score
+
+        user_graph.remove((focus_skill, EX["reliability"], EX[f"accuracy_level_{old_accuracy}"]))
+        user_graph.add((focus_skill, EX["reliability"], EX[f"accuracy_level_{new_accuracy}"]))
+
+
+
     def discover_enjoy_class(self, current_user):
         """
         Finds out a(nother) class that the user is interested in.
@@ -513,7 +583,7 @@ class Primer:
 
         response = self.trans_input(current_user.get_id(), formatted_question + " ")
 
-        affirm = p.parse_yes_or_no(response)
+        affirm = self.parse_yes_or_no(response)
         #print(affirm)
         improvement_score = affirm["degree"] # TODO: Make the improvement score variable based on the response. This variation may come from Primer.parse_yes_or_no
         old_accuracy = int( list(user_graph.objects(focus_skill, EX["reliability"]))[0].split("/")[-1].split("_")[-1] )
@@ -577,7 +647,7 @@ class Primer:
         formatted_question = random.choice(templates).format(disliked_class = course_name, skill = unformat(focus_skill))
         response = self.trans_input(current_user.get_id(), formatted_question + " ")
 
-        affirm = p.parse_yes_or_no(response)
+        affirm = self.parse_yes_or_no(response)
         print(affirm)
         improvement_score = affirm["degree"] # TODO: Make the improvement score variable based on the response. This variation may come from Primer.parse_yes_or_no
         old_accuracy = int( list(user_graph.objects(focus_skill, EX["reliability"]))[0].split("/")[-1].split("_")[-1] )
@@ -634,7 +704,7 @@ class Primer:
         formatted_question = templates[1].format(interested_in = interest_name, interest_infers = unformat(focus_skill))
         response = self.trans_input(current_user.get_id(), formatted_question + " ")
 
-        affirm = p.parse_yes_or_no(response)
+        affirm = self.parse_yes_or_no(response)
         print(affirm)
         improvement_score = affirm["degree"] # TODO: Make the improvement score variable based on the response. This variation may come from Primer.parse_yes_or_no
         old_accuracy = int( list(user_graph.objects(focus_skill, EX["reliability"]))[0].split("/")[-1].split("_")[-1] )
