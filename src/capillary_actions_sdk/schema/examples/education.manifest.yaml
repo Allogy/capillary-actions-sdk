@@ -25,7 +25,7 @@ dimensions:
   decay: none
 knowledge_base:
   kb_names:
-  - calculus_kg
+  - primer-education-kb
   retrieval: corrective_rag
 engagements:
 - tutor-concept
