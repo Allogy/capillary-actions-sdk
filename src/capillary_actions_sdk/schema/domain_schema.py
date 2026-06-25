@@ -78,7 +78,7 @@ if __name__ == '__main__':
             DimensionSpec(name = 'aspirations', fields = ['goals', 'career']),
             DimensionSpec(name = 'regula', fields = ['study_schedule'])
         ],
-        knowledge_base = KnowledgeBaseWiring(kb_names = ['calculus_kg']),
+        knowledge_base = KnowledgeBaseWiring(kb_names = ['primer-education-kb']),
         engagements = ['tutor-concept', '...']
     )
     education_schema.schema_to_yaml('examples/education.manifest.yaml')
@@ -92,9 +92,7 @@ if __name__ == '__main__':
             DimensionSpec(name = 'goals', fields = ['targets']),
             DimensionSpec(name = 'habits', fields = ['cadence'])
         ],
-        knowledge_base = KnowledgeBaseWiring(kb_names = ['coop_finance_policies']),
+        knowledge_base = KnowledgeBaseWiring(kb_names = ['primer-coop-finance-kb']),
         engagements = ['suggest-allocation', '...']
     )
     finance_schema.schema_to_yaml('examples/coop-finance.manifest.yaml')
-
-    print(load('examples/coop-finance.manifest.yaml').dimension_names)

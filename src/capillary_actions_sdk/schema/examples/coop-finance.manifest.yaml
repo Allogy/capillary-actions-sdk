@@ -23,7 +23,7 @@ dimensions:
   decay: none
 knowledge_base:
   kb_names:
-  - coop_finance_policies
+  - primer-coop-finance-kb
   retrieval: corrective_rag
 engagements:
 - suggest-allocation
