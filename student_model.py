@@ -785,9 +785,10 @@ if __name__ == "__main__":
     #print(p.parse_yes_or_no("Wait, no, that's not right at all."))
     #p.set_fixed_state(user, "reinforce interest accuracy")
     #print(p.get_skill_accuracies(user))
-    p.set_dynamic_state(user, "generate personalized question", focus_number = 2)
+    #p.set_dynamic_state(user, "generate personalized question", focus_number = 2)
     # print(p.similarity_score("What specific aspects of procedural learning make it more engaging for you than interpreting abstract ideas?",
     #                          "What specific aspects of procedural learning make you feel more confident in your ability to master a subject?"))
+    print(questions)
     user_graph.serialize(destination = "user_graph.ttl", format = "turtle")
     transcript.serialize(destination = "transcript.ttl", format = "turtle")
 

@@ -1,0 +1,30 @@
+domain: coop-finance
+subject: member
+dimensions:
+- name: financial_history
+  fields:
+  - txns
+  write: event-driven
+  decay: none
+- name: risk_appetite
+  fields:
+  - tolerance
+  write: event-driven
+  decay: none
+- name: goals
+  fields:
+  - targets
+  write: event-driven
+  decay: none
+- name: habits
+  fields:
+  - cadence
+  write: event-driven
+  decay: none
+knowledge_base:
+  kb_names:
+  - coop_finance_policies
+  retrieval: corrective_rag
+engagements:
+- suggest-allocation
+- '...'
