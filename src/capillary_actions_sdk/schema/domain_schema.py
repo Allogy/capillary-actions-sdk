@@ -2,9 +2,6 @@ from __future__ import annotations
 from pydantic import *
 import yaml
 
-reformat = lambda s: "_".join(s.lower().split())
-unformat = lambda s: s.split("/")[-1].replace("_", " ")
-
 class DimensionSpec(BaseModel):
     name: str
     fields: list[str] = Field(max_length = 10)

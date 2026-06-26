@@ -1,6 +1,6 @@
 from __future__ import annotations
-from ports.memory import MemoryStorePort
-from models.student_model import MemoryEntry
+from capillary_actions_sdk.ports.memory import MemoryStorePort
+from capillary_actions_sdk.models.student_model import MemoryEntry
 from uuid import UUID
 
 class InMemoryMemoryStore(MemoryStorePort):
