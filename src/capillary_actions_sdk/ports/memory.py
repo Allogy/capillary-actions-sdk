@@ -1,7 +1,6 @@
 from __future__ import annotations
 from uuid import UUID
 from abc import ABC, abstractmethod
-from __init__ import *
 from pydantic import *
 from models.student_model import MemoryEntry
 

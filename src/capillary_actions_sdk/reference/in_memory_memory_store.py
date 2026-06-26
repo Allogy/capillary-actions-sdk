@@ -1,7 +1,6 @@
 from __future__ import annotations
 from ports.memory import MemoryStorePort
 from models.student_model import MemoryEntry
-from __init__ import *
 from uuid import UUID
 
 class InMemoryMemoryStore(MemoryStorePort):
