@@ -1,0 +1,23 @@
+from __future__ import annotations
+from ports.memory import MemoryStorePort
+from models.student_model import MemoryEntry
+from __init__ import *
+from uuid import UUID
+
+class InMemoryMemoryStore(MemoryStorePort):
+    def __init__(self):
+        self._store = []
+
+    async def store(self, subject_id: UUID, entry: MemoryEntry) -> None:
+        self._store.append({
+            'subject_id': subject_id,
+            'entry': entry
+        })
+
+    async def get(self, subject_id: UUID, dimension: str | None = None, tier: str | None = None) -> list[MemoryEntry]:
+        entries = []
+        for memory in filter(lambda mem: mem['subject_id'] == subject_id, self._store):
+            if dimension in (None, memory['entry'].dimension) and tier in (None, memory['entry'].tier):
+                entries.append(memory['entry'])
+
+        return entries
