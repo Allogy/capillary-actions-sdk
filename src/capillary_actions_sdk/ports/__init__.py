@@ -39,6 +39,7 @@ from student_model import (
     QueryCohortPort,
     SignalStorePort,
 )
+from memory import MemoryStorePort
 
 __all__ = [
     # Platform
