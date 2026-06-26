@@ -2,7 +2,7 @@ from __future__ import annotations
 from uuid import UUID
 from abc import ABC, abstractmethod
 from pydantic import *
-from models.student_model import MemoryEntry
+from capillary_actions_sdk.models.student_model import MemoryEntry
 
 class MemoryStorePort(ABC):
     @abstractmethod
