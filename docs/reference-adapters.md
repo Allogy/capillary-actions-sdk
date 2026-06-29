@@ -36,7 +36,7 @@ The dependency arrows only point **inward** -- toward ports, models, and events.
 
 ## SlackChannelAdapter Dissected
 
-The SDK ships with one reference adapter: `SlackChannelAdapter`, which implements `ChannelAdapterPort` for Slack.
+The SDK ships with two reference adapters: `SlackChannelAdapter`, which implements `ChannelAdapterPort` for Slack, and `InMemoryMemoryStore`, which implements `MemoryStorePort` (see [InMemoryMemoryStore Dissected](#inmemorymemorystore-dissected)).
 
 ### Constructor
 
@@ -112,6 +112,30 @@ No-op. Slack webhook registration is handled externally (via the Slack App confi
 
 Returns `bool(self._bot_token)` -- a simple credential-presence check.
 
+## InMemoryMemoryStore Dissected
+
+`InMemoryMemoryStore` implements `MemoryStorePort` with a process-local list. It is intended for tests and local development, not production persistence.
+
+### Constructor
+
+```python
+def __init__(self) -> None
+```
+
+Initializes a single internal structure: `_store: list[dict]` -- each item holds `{'subject_id': UUID, 'entry': MemoryEntry}`.
+
+### Method-by-Method Walkthrough
+
+#### `store(subject_id, entry)`
+
+Appends `{'subject_id': subject_id, 'entry': entry}` to `_store`. No deduplication -- repeated stores accumulate.
+
+#### `get(subject_id, dimension=None, tier=None)`
+
+Filters `_store` to the matching `subject_id`, then narrows by `dimension` and/or `tier` when provided (a `None` filter matches any value). An unknown `subject_id` yields `[]`.
+
+> **Validation:** adapters do not validate entries themselves. Validate against a `DomainSchema` with `schema.validate_memory_entry(entry, schema)` before storing if you want schema enforcement.
+
 ## Key Design Decisions
 
 ### Token Buffering
@@ -149,6 +173,7 @@ The main extension ports for adapter developers:
 | `TriggerSchedulerPort` | Learning Actions | A scheduling engine (cron, event bus, ...) |
 | `KnowledgeGraphPort` | Learner Interaction | A knowledge graph backend |
 | `KnowledgeBasePort` | Learner Interaction | A knowledge-base retriever (corrective-RAG, vector search, ...) |
+| `MemoryStorePort` | Student Model | A memory persistence backend (Postgres, Redis, vector DB, ...) |
 
 ### Step 2: Subclass the Port ABC
 

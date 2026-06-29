@@ -8,7 +8,7 @@ Extension SDK for the Capillary Actions platform. Provides port interfaces, data
 
 ## Architecture
 
-The SDK is a **contract library** following [Explicit Architecture](https://herbertograca.com/2017/11/16/explicit-architecture-01-ddd-hexagonal-onion-clean-cqrs-how-i-put-it-all-together/) (Hexagonal + Clean Architecture + DDD). It defines the domain models, port interfaces, and shared event protocol that the platform and its extensions agree on — with zero dependencies beyond Pydantic.
+The SDK is a **contract library** following [Explicit Architecture](https://herbertograca.com/2017/11/16/explicit-architecture-01-ddd-hexagonal-onion-clean-cqrs-how-i-put-it-all-together/) (Hexagonal + Clean Architecture + DDD). It defines the domain models, port interfaces, and shared event protocol that the platform and its extensions agree on — with minimal runtime dependencies (Pydantic, plus PyYAML for the `schema/` manifest loader).
 
 ```mermaid
 graph TD
@@ -21,11 +21,12 @@ graph TD
     end
 
     subgraph boundary["Application Boundary"]
-        PORTS["<code>ports/</code> — Port interfaces: 10 inbound, 13 outbound"]
+        PORTS["<code>ports/</code> — Port interfaces: 10 inbound, 14 outbound"]
     end
 
     subgraph innermost["Domain Layer"]
         MODELS["<code>models/</code> — Entities &amp; Value Objects (32 models)"]
+        SCHEMA["<code>schema/</code> — Domain manifests (DomainSchema, load, validate_memory_entry)"]
     end
 
     REF --> PORTS
@@ -45,7 +46,7 @@ Dependencies point **inward** — the domain depends on nothing; infrastructure 
 
 | Track | Domain | Focus | Main Extension Point |
 |-------|--------|-------|---------------------|
-| 1 | Student Model | Cohort-based preference aggregation, learner memory | `CohortStrategyPort` |
+| 1 | Student Model | Cohort-based preference aggregation, learner memory | `CohortStrategyPort`, `MemoryStorePort` |
 | 2a | Learning Actions | Triggers, orchestration DAGs, agent loops | `TriggerSchedulerPort` |
 | 2b | Learner Interaction | Knowledge graphs, knowledge-base retrieval, learner progress, teaching | `KnowledgeBasePort`, `KnowledgeGraphPort`, `LearnerProgressPort`, `TeachingPort` |
 | 3 | Presentation | Multi-channel messaging, sessions, HITL gates | `ChannelAdapterPort` |

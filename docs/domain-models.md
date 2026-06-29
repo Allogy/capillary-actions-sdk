@@ -408,7 +408,25 @@ classDiagram
 
 ---
 
-## 7. Contributor Guardrails
+## 7. Domain Schema models (`schema/`)
+
+Separate from the entity/value-object models above, the `schema/` package holds **declarative
+domain-manifest** models — the shape of a domain configured in YAML rather than in code:
+
+| Model | Role |
+|-------|------|
+| `DomainSchema` | Top-level manifest (`domain`, `subject`, `dimensions`, `knowledge_base`, `engagements`); rejects duplicate dimension names and caps dimensions/fields at 10 |
+| `DimensionSpec` | One memory dimension (`name`, `fields`, `write`, `decay`) |
+| `KnowledgeBaseWiring` | KB names + retrieval strategy for the domain |
+
+Helpers `load(path)` and `validate_memory_entry(entry, schema)` accompany them. These models depend
+only on `pydantic` + `pyyaml`. See [architecture.md#domain-schema-manifests](architecture.md#domain-schema-manifests)
+for how they fit the broader picture and [ports.md](ports.md#4-main-extension-points) for their use
+by `MemoryStorePort`.
+
+---
+
+## 8. Contributor Guardrails
 
 - Models must remain **framework-free** -- only `stdlib` and `pydantic` are allowed as dependencies.
 - **No imports** from `ports/`, `events.py`, or `reference/`. The domain layer depends on nothing outside itself.

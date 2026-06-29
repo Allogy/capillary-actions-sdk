@@ -16,6 +16,7 @@ from capillary_actions_sdk.ports.learning_actions import (
     TriggerSchedulerPort,
     WorkflowInvokerPort,
 )
+from capillary_actions_sdk.ports.memory import MemoryStorePort
 from capillary_actions_sdk.ports.platform import (
     EventStreamPort,
     ResumeWorkflowPort,
@@ -60,6 +61,8 @@ __all__ = [
     "ManageCohortPort",
     "QueryCohortPort",
     "SignalStorePort",
+    # Track 1 — Memory
+    "MemoryStorePort",
     # Track 2 — Learning Actions
     "LoopStatePort",
     "OrchestrationStatePort",
