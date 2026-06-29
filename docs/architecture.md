@@ -11,7 +11,7 @@ The SDK is a **contract library**, not a runtime. It packages:
 - **Domain models** — pure Pydantic data structures representing the platform's ubiquitous language
 - **Port interfaces** — abstract contracts (Python ABCs) defining what the platform can do and what it needs
 - **An event protocol** — the AG-UI Shared Kernel that all adapters speak
-- **A reference adapter** — a concrete implementation demonstrating how to build against the contracts
+- **Reference adapters** — concrete implementations demonstrating how to build against the contracts (`SlackChannelAdapter`, `InMemoryMemoryStore`)
 
 The only runtime dependency is `pydantic >= 2.0.0`. No frameworks, no infrastructure libraries, no database drivers. This is by design — the SDK defines the *shape* of the system, not the *machinery*.
 
@@ -22,7 +22,7 @@ The SDK's folder structure maps directly to the concentric layers of Explicit Ar
 ```mermaid
 graph TD
     subgraph outermost["Infrastructure Layer"]
-        REF["<code>reference/</code><br/>Concrete adapter implementations<br/><i>SlackChannelAdapter</i>"]
+        REF["<code>reference/</code><br/>Concrete adapter implementations<br/><i>SlackChannelAdapter, InMemoryMemoryStore</i>"]
     end
 
     subgraph shared["Shared Kernel"]
@@ -30,7 +30,7 @@ graph TD
     end
 
     subgraph boundary["Application Boundary"]
-        PORTS["<code>ports/</code><br/>Port interfaces (ABCs)<br/><i>18 ports: 10 inbound, 12 outbound</i>"]
+        PORTS["<code>ports/</code><br/>Port interfaces (ABCs)<br/><i>23 ports: 10 inbound, 13 outbound</i>"]
     end
 
     subgraph innermost["Domain Layer"]
@@ -139,13 +139,27 @@ The SDK organizes its models and ports into four domain tracks, each representin
 
 | Track | Domain | Models File | Ports File | Focus |
 |-------|--------|-------------|------------|-------|
-| **1** | Student Model | `models/student_model.py` | `ports/student_model.py` | Cohort-based preference aggregation and learner memory |
+| **1** | Student Model | `models/student_model.py` | `ports/student_model.py`, `ports/memory.py` | Cohort-based preference aggregation and learner memory |
 | **2a** | Learning Actions | `models/learning_actions.py` | `ports/learning_actions.py` | Triggers, orchestration DAGs, autonomous agent loops |
 | **2b** | Learner Interaction | `models/learner_interaction.py` | `ports/learner_interaction.py` | Knowledge graphs, learner progress, teaching context |
 | **3** | Presentation | `models/presentation.py` | `ports/presentation.py` | Multi-channel messaging, sessions, human-in-the-loop gates |
 | — | Platform Services | — | `ports/platform.py` | Workflow execution, event streaming, state management |
 
 Each track has its own models (domain layer) and ports (application boundary). The tracks communicate through the AG-UI event protocol (Shared Kernel), not through direct imports of each other's models.
+
+## Domain Schema manifests
+
+The `schema/` package lets a deployment describe *what* a domain looks like declaratively, as a YAML manifest, rather than in code. It is consumed primarily by the Student Model track (memory dimensions) and the knowledge-base wiring.
+
+| Symbol | Role |
+|--------|------|
+| `DomainSchema` | Top-level manifest: `domain`, `subject`, `dimensions`, `knowledge_base`, `engagements` |
+| `DimensionSpec` | One memory dimension: `name`, `fields` (≤10), `write`, `decay` |
+| `KnowledgeBaseWiring` | KB names + retrieval strategy for the domain |
+| `load(path)` | Parse a YAML manifest into a `DomainSchema` |
+| `validate_memory_entry(entry, schema)` | Raise `ValueError` if a `MemoryEntry`'s `dimension` is not declared in the schema |
+
+A `DomainSchema` rejects duplicate dimension names and caps dimensions/fields at 10. Example manifests live in `schema/examples/` (`education.manifest.yaml`, `coop-finance.manifest.yaml`). A `MemoryStorePort` implementation (see [Ports](ports.md#4-main-extension-points)) typically calls `validate_memory_entry` before persisting.
 
 ## How the SDK Fits in the Platform
 
@@ -187,5 +201,5 @@ For the full architecture principles guiding the platform, see the backend's `AR
 | [Domain Models](domain-models.md) | Entity/Value Object classification, the four tracks, model relationships |
 | [Ports](ports.md) | Inbound/outbound port catalog, extension points, method patterns |
 | [Events](events.md) | AG-UI Shared Kernel, event taxonomy, lifecycle sequence |
-| [Reference Adapters](reference-adapters.md) | SlackChannelAdapter dissected, building your own adapter |
+| [Reference Adapters](reference-adapters.md) | Reference adapters dissected (SlackChannelAdapter, InMemoryMemoryStore), building your own adapter |
 | [Contributing](contributing.md) | Dependency rule enforcement, checklists, testing patterns |

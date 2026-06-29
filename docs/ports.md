@@ -61,6 +61,7 @@ graph LR
         O1["CohortStrategyPort"]
         O2["SignalStorePort"]
         O3["CohortStorePort"]
+        O13["MemoryStorePort"]
         O4["TriggerSchedulerPort"]
         O5["WorkflowInvokerPort"]
         O6["LoopStatePort"]
@@ -96,6 +97,7 @@ graph LR
 | `student_model.py` | `CohortStrategyPort` | Outbound | Student Model |
 | `student_model.py` | `SignalStorePort` | Outbound | Student Model |
 | `student_model.py` | `CohortStorePort` | Outbound | Student Model |
+| `memory.py` | `MemoryStorePort` | Outbound | Student Model |
 | `learning_actions.py` | `RegisterTriggerPort` | Inbound | Learning Actions |
 | `learning_actions.py` | `RunOrchestratorPort` | Inbound | Learning Actions |
 | `learning_actions.py` | `RunAgentLoopPort` | Inbound | Learning Actions |
@@ -109,7 +111,7 @@ graph LR
 | `presentation.py` | `ChannelAdapterPort` | Outbound | Presentation |
 | `presentation.py` | `ChannelSessionStorePort` | Outbound | Presentation |
 
-All 22 ports are re-exported from `ports/__init__.py` alongside the 4 platform DTOs.
+All 23 ports are re-exported from `ports/__init__.py` alongside the 4 platform DTOs.
 
 ---
 
@@ -128,6 +130,15 @@ Implement this port to control how learners are grouped into cohorts. A strategy
 | `evolve(cohort_id, new_signals)` | Update a cohort's aggregate state with new signals |
 | `should_reorganize(cohort_id)` | Determine whether the cohort needs a full reorganization |
 | `reorganize(org_id)` | Perform a full reorganization of all cohorts in an organization |
+
+### MemoryStorePort -- Plug in a memory backend
+
+Implement this port to back the learner/subject memory store with your own persistence (Postgres, Redis, a vector DB, etc.). The SDK ships `InMemoryMemoryStore` as a reference implementation (see [Reference Adapters](reference-adapters.md)). Entries are validated against a `DomainSchema` via `schema.validate_memory_entry` (see [the schema module](architecture.md#domain-schema-manifests)).
+
+| Method | Purpose |
+|--------|---------|
+| `store(subject_id, entry)` | Persist a `MemoryEntry` for a subject |
+| `get(subject_id, dimension=None, tier=None)` | Retrieve a subject's entries, optionally filtered by dimension and/or tier |
 
 ### TriggerSchedulerPort -- Plug in a scheduling engine
 
