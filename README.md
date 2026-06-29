@@ -21,7 +21,7 @@ graph TD
     end
 
     subgraph boundary["Application Boundary"]
-        PORTS["<code>ports/</code> — Port interfaces: 10 inbound, 12 outbound"]
+        PORTS["<code>ports/</code> — Port interfaces: 10 inbound, 13 outbound"]
     end
 
     subgraph innermost["Domain Layer"]
@@ -47,7 +47,7 @@ Dependencies point **inward** — the domain depends on nothing; infrastructure 
 |-------|--------|-------|---------------------|
 | 1 | Student Model | Cohort-based preference aggregation, learner memory | `CohortStrategyPort` |
 | 2a | Learning Actions | Triggers, orchestration DAGs, agent loops | `TriggerSchedulerPort` |
-| 2b | Learner Interaction | Knowledge graphs, learner progress, teaching | `KnowledgeGraphPort`, `LearnerProgressPort`, `TeachingPort` |
+| 2b | Learner Interaction | Knowledge graphs, knowledge-base retrieval, learner progress, teaching | `KnowledgeBasePort`, `KnowledgeGraphPort`, `LearnerProgressPort`, `TeachingPort` |
 | 3 | Presentation | Multi-channel messaging, sessions, HITL gates | `ChannelAdapterPort` |
 
 ## Getting Started
