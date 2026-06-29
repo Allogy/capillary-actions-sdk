@@ -1,45 +1,62 @@
 from __future__ import annotations
-from pydantic import *
+
 import yaml
+from pydantic import BaseModel, Field, field_validator
+
+from capillary_actions_sdk.models.student_model import MemoryEntry
+
 
 class DimensionSpec(BaseModel):
     name: str
-    fields: list[str] = Field(max_length = 10)
-    write: str = "event-driven" # "session-summary" | "threshold"
-    decay: str = "none" # "linear" | "exponential"
+    fields: list[str] = Field(max_length=10)
+    write: str = "event-driven"  # "session-summary" | "threshold"
+    decay: str = "none"  # "linear" | "exponential"
+
 
 class KnowledgeBaseWiring(BaseModel):
     kb_names: list[str]
     retrieval: str = "corrective_rag"
 
+
 class DomainSchema(BaseModel):
     domain: str
     subject: str
-    dimensions: list[DimensionSpec] = Field(max_length = 10)
+    dimensions: list[DimensionSpec] = Field(max_length=10)
     knowledge_base: KnowledgeBaseWiring
     engagements: list[str]
 
-    def schema_to_yaml(self, yaml_file):
+    @field_validator("dimensions")
+    @classmethod
+    def _reject_duplicate_dimension_names(
+        cls, dimensions: list[DimensionSpec]
+    ) -> list[DimensionSpec]:
+        names = [dimension.name for dimension in dimensions]
+        duplicates = sorted({name for name in names if names.count(name) > 1})
+        if duplicates:
+            raise ValueError(f"Duplicate dimension names are not allowed: {duplicates}")
+        return dimensions
+
+    def schema_to_yaml(self, yaml_file: str) -> None:
         data = {
-            'domain': self.domain,
-            'subject': self.subject,
-            'dimensions': [
+            "domain": self.domain,
+            "subject": self.subject,
+            "dimensions": [
                 {
-                    'name': dimension.name,
-                    'fields': dimension.fields,
-                    'write': dimension.write,
-                    'decay': dimension.decay
+                    "name": dimension.name,
+                    "fields": dimension.fields,
+                    "write": dimension.write,
+                    "decay": dimension.decay,
                 }
                 for dimension in self.dimensions
             ],
-            'knowledge_base': {'kb_names': self.knowledge_base.kb_names, 'retrieval': self.knowledge_base.retrieval},
-            'engagements': self.engagements
+            "knowledge_base": {
+                "kb_names": self.knowledge_base.kb_names,
+                "retrieval": self.knowledge_base.retrieval,
+            },
+            "engagements": self.engagements,
         }
         with open(yaml_file, "w") as file:
-            yaml.safe_dump(data, file, sort_keys = False)
-
-
-        print(f"Schema successfully converted into {yaml_file}")
+            yaml.safe_dump(data, file, sort_keys=False)
 
     @property
     def dimension_names(self) -> list[str]:
@@ -49,47 +66,41 @@ class DomainSchema(BaseModel):
         for dimension in self.dimensions:
             if dimension.name == name:
                 return dimension
+        return None
+
 
 def load(path: str) -> DomainSchema:
-    with open(path, mode = "r") as file:
-        yaml_file = yaml.safe_load(file)
+    with open(path, mode="r") as file:
+        data = yaml.safe_load(file)
 
     return DomainSchema(
-        domain = yaml_file['domain'],
-        subject = yaml_file['subject'],
-        dimensions = [DimensionSpec(name = dimension['name'], fields = dimension['fields'], write = dimension['write'], decay = dimension['decay']) for dimension in yaml_file['dimensions']],
-        knowledge_base = KnowledgeBaseWiring(kb_names = yaml_file['knowledge_base']['kb_names'], retrieval = yaml_file['knowledge_base']['retrieval']),
-        engagements = yaml_file['engagements']
-    )
-
-def validate_memory_entry(entry, schema: DomainSchema) -> None:
-    raise ValueError
-
-if __name__ == '__main__':
-    education_schema = DomainSchema(
-        domain = "education",
-        subject = "learner",
-        dimensions = [
-            DimensionSpec(name = 'history', fields = ['courses', 'scores']),
-            DimensionSpec(name = 'affinities', fields = ['subject preferences']),
-            DimensionSpec(name = 'aspirations', fields = ['goals', 'career']),
-            DimensionSpec(name = 'regula', fields = ['study_schedule'])
+        domain=data["domain"],
+        subject=data["subject"],
+        dimensions=[
+            DimensionSpec(
+                name=dimension["name"],
+                fields=dimension["fields"],
+                write=dimension.get("write", "event-driven"),
+                decay=dimension.get("decay", "none"),
+            )
+            for dimension in data["dimensions"]
         ],
-        knowledge_base = KnowledgeBaseWiring(kb_names = ['primer-education-kb']),
-        engagements = ['tutor-concept', '...']
+        knowledge_base=KnowledgeBaseWiring(
+            kb_names=data["knowledge_base"]["kb_names"],
+            retrieval=data["knowledge_base"].get("retrieval", "corrective_rag"),
+        ),
+        engagements=data["engagements"],
     )
-    education_schema.schema_to_yaml('examples/education.manifest.yaml')
 
-    finance_schema = DomainSchema(
-        domain = "coop-finance",
-        subject = "member",
-        dimensions = [
-            DimensionSpec(name = 'financial_history', fields = ['txns']),
-            DimensionSpec(name = 'risk_appetite', fields = ['tolerance']),
-            DimensionSpec(name = 'goals', fields = ['targets']),
-            DimensionSpec(name = 'habits', fields = ['cadence'])
-        ],
-        knowledge_base = KnowledgeBaseWiring(kb_names = ['primer-coop-finance-kb']),
-        engagements = ['suggest-allocation', '...']
-    )
-    finance_schema.schema_to_yaml('examples/coop-finance.manifest.yaml')
+
+def validate_memory_entry(entry: MemoryEntry, schema: DomainSchema) -> None:
+    """Validate a memory entry against a domain schema.
+
+    Raises:
+        ValueError: if the entry's dimension is not declared in the schema.
+    """
+    if entry.dimension not in schema.dimension_names:
+        raise ValueError(
+            f"Unknown dimension {entry.dimension!r} for domain {schema.domain!r}; "
+            f"valid dimensions: {schema.dimension_names}"
+        )
