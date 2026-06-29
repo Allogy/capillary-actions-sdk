@@ -37,6 +37,7 @@ graph TD
 | Module | Can Import From | Cannot Import From |
 |--------|----------------|-------------------|
 | `models/` | `stdlib`, `pydantic` | `ports/`, `events.py`, `reference/` |
+| `schema/` | `models/`, `stdlib`, `pydantic`, `pyyaml` | `ports/`, `reference/` |
 | `events.py` | `stdlib`, `pydantic` | `models/`, `ports/`, `reference/` |
 | `ports/` | `models/`, `events.py`, `stdlib`, `pydantic` | `reference/` |
 | `reference/` | `ports/`, `models/`, `events.py`, `stdlib`, `pydantic` | (no restrictions) |
@@ -178,7 +179,7 @@ async def test_token_buffering():
 | Ruff rules | E, F, I, W | `pyproject.toml [tool.ruff.lint]` |
 | Type annotations | Required on all public methods | Convention |
 | PEP 561 | `py.typed` marker present | `src/capillary_actions_sdk/py.typed` |
-| Runtime dependencies | `pydantic >= 2.0.0` only | `pyproject.toml [project.dependencies]` |
+| Runtime dependencies | `pydantic >= 2.0.0`, `pyyaml >= 6.0.3` | `pyproject.toml [project.dependencies]` |
 | Dev dependencies | `pytest`, `pytest-asyncio`, `ruff` | `pyproject.toml [dependency-groups]` |
 | All port methods | `async` | Convention |
 
@@ -187,7 +188,7 @@ async def test_token_buffering():
 ```bash
 uv run ruff check .          # Lint
 uv run ruff format .         # Format
-uv run pytest                # Run all 209 tests
+uv run pytest                # Run all 224 tests
 uv run pytest tests/test_models_student.py  # Run one file
 ```
 

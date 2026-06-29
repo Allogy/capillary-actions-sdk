@@ -172,6 +172,7 @@ The main extension ports for adapter developers:
 | `CohortStrategyPort` | Student Model | A clustering algorithm (k-means, similarity, ...) |
 | `TriggerSchedulerPort` | Learning Actions | A scheduling engine (cron, event bus, ...) |
 | `KnowledgeGraphPort` | Learner Interaction | A knowledge graph backend |
+| `KnowledgeBasePort` | Learner Interaction | A knowledge-base retriever (corrective-RAG, vector search, ...) |
 | `MemoryStorePort` | Student Model | A memory persistence backend (Postgres, Redis, vector DB, ...) |
 
 ### Step 2: Subclass the Port ABC

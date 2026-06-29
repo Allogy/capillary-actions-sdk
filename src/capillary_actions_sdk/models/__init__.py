@@ -1,4 +1,7 @@
 # Track 1 — Student Model models
+# Track 2 — Knowledge Base models
+from capillary_actions_sdk.models.knowledge import RetrievedChunk
+
 # Track 2 — Learning Actions models
 from capillary_actions_sdk.models.learner_interaction import (
     KnowledgeConcept,
@@ -70,6 +73,8 @@ __all__ = [
     "TriggerEvent",
     "TriggerTarget",
     "WorkflowResult",
+    # Track 2 — Knowledge Base
+    "RetrievedChunk",
     # Track 2 — Learner Interaction
     "KnowledgeConcept",
     "KnowledgeGraph",

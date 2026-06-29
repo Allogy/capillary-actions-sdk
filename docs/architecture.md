@@ -13,7 +13,7 @@ The SDK is a **contract library**, not a runtime. It packages:
 - **An event protocol** — the AG-UI Shared Kernel that all adapters speak
 - **Reference adapters** — concrete implementations demonstrating how to build against the contracts (`SlackChannelAdapter`, `InMemoryMemoryStore`)
 
-The only runtime dependency is `pydantic >= 2.0.0`. No frameworks, no infrastructure libraries, no database drivers. This is by design — the SDK defines the *shape* of the system, not the *machinery*.
+Runtime dependencies are `pydantic >= 2.0.0` and `pyyaml >= 6.0.3` (the latter only for the `schema/` manifest loader). No frameworks, no infrastructure libraries, no database drivers. This is by design — the SDK defines the *shape* of the system, not the *machinery*.
 
 ## Concentric Layer Model
 
@@ -30,11 +30,11 @@ graph TD
     end
 
     subgraph boundary["Application Boundary"]
-        PORTS["<code>ports/</code><br/>Port interfaces (ABCs)<br/><i>23 ports: 10 inbound, 13 outbound</i>"]
+        PORTS["<code>ports/</code><br/>Port interfaces (ABCs)<br/><i>24 ports: 10 inbound, 14 outbound</i>"]
     end
 
     subgraph innermost["Domain Layer"]
-        MODELS["<code>models/</code><br/>Entities &amp; Value Objects<br/><i>32 Pydantic models, zero dependencies</i>"]
+        MODELS["<code>models/</code><br/>Entities &amp; Value Objects<br/><i>33 Pydantic models, zero dependencies</i>"]
     end
 
     REF --> PORTS

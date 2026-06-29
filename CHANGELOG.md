@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Added
+
+- `schema/` package — declarative domain manifests: `DomainSchema`, `DimensionSpec`,
+  `KnowledgeBaseWiring`, `load()`, and `validate_memory_entry()` (LD-W1)
+- `MemoryStorePort` (`ports/memory.py`) — outbound port for learner/subject memory persistence
+- `InMemoryMemoryStore` (`reference/in_memory_memory_store.py`) — reference implementation
+- `KnowledgeBasePort` (`ports/knowledge.py`) + `RetrievedChunk` (`models/knowledge.py`) —
+  knowledge-base retrieval contract (KG-W1)
+- Example domain manifests (`schema/examples/{education,coop-finance}.manifest.yaml`)
+
+### Changed
+
+- New runtime dependency: `pyyaml>=6.0.3` (used by the `schema/` manifest loader)
+
 ## [0.2.0] - 2026-04-28
 
 ### Changed

@@ -71,6 +71,7 @@ graph LR
         O10["TeachingPort"]
         O11["ChannelAdapterPort"]
         O12["ChannelSessionStorePort"]
+        O14["KnowledgeBasePort"]
     end
 
     driving -->|"use"| core
@@ -105,13 +106,14 @@ graph LR
 | `learning_actions.py` | `WorkflowInvokerPort` | Outbound | Learning Actions |
 | `learning_actions.py` | `LoopStatePort` | Outbound | Learning Actions |
 | `learning_actions.py` | `OrchestrationStatePort` | Outbound | Learning Actions |
+| `knowledge.py` | `KnowledgeBasePort` | Outbound | Learner Interaction |
 | `learner_interaction.py` | `KnowledgeGraphPort` | Outbound | Learner Interaction |
 | `learner_interaction.py` | `LearnerProgressPort` | Outbound | Learner Interaction |
 | `learner_interaction.py` | `TeachingPort` | Outbound | Learner Interaction |
 | `presentation.py` | `ChannelAdapterPort` | Outbound | Presentation |
 | `presentation.py` | `ChannelSessionStorePort` | Outbound | Presentation |
 
-All 23 ports are re-exported from `ports/__init__.py` alongside the 4 platform DTOs.
+All 24 ports are re-exported from `ports/__init__.py` alongside the 4 platform DTOs.
 
 ---
 
@@ -166,6 +168,14 @@ Implement this port to connect a messaging channel (Slack, Telegram, Teams, etc.
 | `resolve_session(raw_payload)` | Identify or create the channel session from an inbound payload |
 | `register_webhook(callback_url)` | Register the webhook endpoint with the channel platform |
 | `health_check()` | Verify the channel integration is reachable |
+
+### KnowledgeBasePort -- Plug in a knowledge base retriever
+
+Implement this port to back document/chunk retrieval (corrective-RAG and similar) over one or more named knowledge bases. It is distinct from `KnowledgeGraphPort`, which serves structured concept graphs. Results are returned as `RetrievedChunk` models (`models/knowledge.py`).
+
+| Method | Purpose |
+|--------|---------|
+| `retrieve(query, kb_names, top_k=5)` | Return the top-k `RetrievedChunk`s for a query across the named knowledge bases, ordered by descending relevance |
 
 ### Learner Interaction trio -- Connect a knowledge graph and progress tracker
 

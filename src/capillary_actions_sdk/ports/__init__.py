@@ -1,3 +1,6 @@
+# Track 2 — Knowledge Base port
+from capillary_actions_sdk.ports.knowledge import KnowledgeBasePort
+
 # Track 2 — Learner Interaction ports
 from capillary_actions_sdk.ports.learner_interaction import (
     KnowledgeGraphPort,
@@ -68,6 +71,8 @@ __all__ = [
     "RunOrchestratorPort",
     "TriggerSchedulerPort",
     "WorkflowInvokerPort",
+    # Track 2 — Knowledge Base
+    "KnowledgeBasePort",
     # Track 2 — Learner Interaction
     "KnowledgeGraphPort",
     "LearnerProgressPort",
