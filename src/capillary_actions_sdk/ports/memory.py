@@ -5,6 +5,7 @@ from uuid import UUID
 
 from capillary_actions_sdk.models.student_model import MemoryEntry
 
+
 class MemoryStorePort(ABC):
     @abstractmethod
     async def store(self, subject_id: UUID, entry: MemoryEntry) -> None:
