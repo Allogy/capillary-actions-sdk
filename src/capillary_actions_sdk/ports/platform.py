@@ -82,10 +82,10 @@ class ResumeWorkflowRequest:
         self,
         workflow_run_id: UUID,
         thread_id: str,
-        node_id: str,
         decision: str | None,
         input_data: dict | None,
         comment: str | None,
+        node_id: str | None = None,
     ) -> None:
         self.workflow_run_id = workflow_run_id
         self.thread_id = thread_id
