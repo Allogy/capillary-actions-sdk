@@ -72,6 +72,7 @@ class ResumeWorkflowRequest:
     Args:
         workflow_run_id: UUID of the paused workflow run to resume.
         thread_id: Conversation/session thread identifier.
+        node_id: ID of the paused INPUT or HUMAN_REVIEW node.
         decision: Human approval decision (e.g. ``'approve'``, ``'reject'``).
         input_data: Optional additional data to inject on resume.
         comment: Optional free-text comment attached to the decision.
@@ -81,12 +82,14 @@ class ResumeWorkflowRequest:
         self,
         workflow_run_id: UUID,
         thread_id: str,
+        node_id: str,
         decision: str | None,
         input_data: dict | None,
         comment: str | None,
     ) -> None:
         self.workflow_run_id = workflow_run_id
         self.thread_id = thread_id
+        self.node_id = node_id
         self.decision = decision
         self.input_data = input_data
         self.comment = comment

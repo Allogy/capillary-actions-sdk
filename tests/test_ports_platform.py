@@ -69,12 +69,14 @@ class TestResumeWorkflowRequest:
         req = ResumeWorkflowRequest(
             workflow_run_id=run_id,
             thread_id="thread-xyz",
+            node_id="node-123",
             decision="approve",
             input_data={"extra": "data"},
             comment="Looks good",
         )
         assert req.workflow_run_id == run_id
         assert req.thread_id == "thread-xyz"
+        assert req.node_id == "node-123"
         assert req.decision == "approve"
         assert req.input_data == {"extra": "data"}
         assert req.comment == "Looks good"
@@ -83,10 +85,12 @@ class TestResumeWorkflowRequest:
         req = ResumeWorkflowRequest(
             workflow_run_id=uuid4(),
             thread_id="thread-1",
+            node_id="node-1",
             decision=None,
             input_data=None,
             comment=None,
         )
+        assert req.node_id == "node-1"
         assert req.decision is None
         assert req.input_data is None
         assert req.comment is None
