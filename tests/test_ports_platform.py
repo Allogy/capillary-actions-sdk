@@ -88,9 +88,8 @@ class TestResumeWorkflowRequest:
             decision=None,
             input_data=None,
             comment=None,
-            node_id="node-1",
         )
-        assert req.node_id == "node-1"
+        assert req.node_id is None
         assert req.decision is None
         assert req.input_data is None
         assert req.comment is None
