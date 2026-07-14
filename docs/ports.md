@@ -219,7 +219,7 @@ Platform ports use dedicated request/response objects rather than loose paramete
 |-----|--------|---------|
 | `RunWorkflowRequest` | `workflow_id: UUID`, `thread_id: str`, `input_data: dict \| None`, `org_id: UUID \| None` | `RunWorkflowPort` |
 | `RunWorkflowResponse` | `run_id: str`, `output: dict`, `status: str` | `RunWorkflowPort.run_sync` |
-| `ResumeWorkflowRequest` | `workflow_run_id: UUID`, `thread_id: str`, `decision: str \| None`, `input_data: dict \| None`, `comment: str \| None` | `ResumeWorkflowPort` |
+| `ResumeWorkflowRequest` | `workflow_run_id: UUID`, `thread_id: str`, `decision: str \| None`, `input_data: dict \| None`, `comment: str \| None`, `node_id: str` | `ResumeWorkflowPort` |
 | `ResumeWorkflowResponse` | `run_id: str`, `status: str` | `ResumeWorkflowPort.resume_sync`, `ResumeWorkflowPort.reject` |
 
 ### RunWorkflowPort
